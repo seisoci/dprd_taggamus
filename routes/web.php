@@ -34,11 +34,15 @@ Route::prefix('backend')->name('backend.')->middleware(['auth:web'])->group(func
   Route::resource('guestbooks', Backend\GuestBookController::class);
   Route::put('sliders/updateimage', [Backend\SliderController::class, 'updateimage'])->name('sliders.update-image');
   Route::resource('sliders', Backend\SliderController::class);
+  Route::post('news/uploadimagecke', [Backend\NewsController::class, 'uploadimagecke'])->name('news.uploadimagecke');
   Route::resource('news', Backend\NewsController::class);
   Route::get('post-categories/select2', [Backend\PostCategoryController::class, 'select2'])->name('post-categories.select2');
   Route::resource('post-categories', Backend\PostCategoryController::class);
   Route::resource('pages', Backend\PageController::class);
   Route::resource('videos', Backend\VideoController::class);
+  Route::resource('galleries', Backend\GalleryController::class);
+  Route::post('galleries/{gallery}/photos/updateimage', [Backend\PhotoController::class, 'updateimage'])->name('photos.updateimage');
+  Route::resource('galleries.photos', Backend\PhotoController::class);
 
   Route::get('dashboard', DefaultBackend\DashboardController::class)->name('dashboard.index');
   Route::get('roles/select2', [DefaultBackend\RoleController::class, 'select2'])->name('roles.select2');

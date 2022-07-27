@@ -121,7 +121,7 @@
           },
           {
             data: 'profile_name',
-            name: 'profiles.name',
+            name: 'users.name',
           },
           {data: 'action', name: 'action', className: 'text-center', orderable: false, searchable: false},
         ],

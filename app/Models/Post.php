@@ -69,6 +69,11 @@ class Post extends Model
     );
   }
 
+  public function datastorage()
+  {
+    return $this->morphMany(DataStorage::class, 'storagable', 'storage_data_type', 'storage_data_id');
+  }
+
   protected function serializeDate(\DateTimeInterface $date)
   {
     return $date->isoFormat('DD MMMM YYYY HH:mm');

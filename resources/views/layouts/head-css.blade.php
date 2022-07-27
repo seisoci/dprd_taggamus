@@ -11,4 +11,9 @@
 <link href="{{ asset('assets/plugins/datatable/css/rowGroup.bootstrap5.css') }}" rel="stylesheet"/>
 <link href="{{ asset('assets/plugins/select2/select2.min.css') }}" rel="stylesheet"/>
 <link href="{{ asset('assets/plugins/toastr/toastr.min.css') }}" rel="stylesheet"/>
+<style>
+  .ck-editor__editable_inline {
+    min-height: 400px !important;
+  }
+</style>
 @yield('css')

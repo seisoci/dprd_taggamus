@@ -95,7 +95,7 @@ class NewsController extends Controller
       'title' => 'required|string',
       'post_categories' => 'nullable|array',
       'post_categories.*' => 'nullable|integer',
-      'image' => 'image|mimes:jpg,png,jpeg|max:2048',
+      'image' => 'image|mimes:jpg,png,jpeg|max:5000',
       'status' => 'in:0,1',
     ]);
 
@@ -148,7 +148,7 @@ class NewsController extends Controller
     ]);
 
     if ($validator->passes()) {
-      $dimensions = [['640', '480', 'thumbnail']];
+      $dimensions = [['1280', '1280', 'thumbnail']];
       DB::beginTransaction();
       try {
         $post = Post::with('post_categories')->find($id);
@@ -188,4 +188,18 @@ class NewsController extends Controller
     }
     return $response;
   }
+
+  public function uploadimagecke(Request $request){
+    if ($request->hasFile('upload')) {
+      $originName = $request->file('upload')->getClientOriginalName();
+      $fileName = pathinfo($originName, PATHINFO_FILENAME);
+      $extension = $request->file('upload')->getClientOriginalExtension();
+      $fileName = $fileName . '_' . time() . '.' . $extension;
+      $dimensions = [['1280', '720', 'thumbnail']];
+      $image = isset($request['upload']) && !empty($request['upload']) ? FileUpload::uploadImage('upload', $dimensions) : NULL;
+
+      return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => asset("/storage/images/original/".$image)]);
+    }
+  }
+
 }

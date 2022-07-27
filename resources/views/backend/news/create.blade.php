@@ -86,7 +86,15 @@
   <script src="{{ asset('assets/plugins/flatpickr/flatpickr.js') }}"></script>
   <script>
     $(document).ready(function () {
-      ClassicEditor.create(document.querySelector('#editor'));
+      ClassicEditor.create(document.querySelector("#editor"), {
+        ckfinder: {
+          uploadUrl: '{{route('backend.news.uploadimagecke').'?_token='.csrf_token()}}'
+        },
+        toolbar: {
+          shouldNotGroupWhenFull: true
+        }
+      });
+
 
       $("#formStore").submit(function (e) {
         e.preventDefault();
