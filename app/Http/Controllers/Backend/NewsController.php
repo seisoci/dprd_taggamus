@@ -44,7 +44,7 @@ class NewsController extends Controller
          GROUP_CONCAT(`post_categories`.`name`) AS `post_category_name`
       ')
         ->where('posts.type', 'posts')
-        ->leftJoin('users','users.id', '=', 'posts.user_id')
+        ->leftJoin('users', 'users.id', '=', 'posts.user_id')
         ->leftJoin('post_post_category', function ($join) {
           $join->on('post_post_category.post_id', '=', 'posts.id');
           $join->leftJoin('post_categories', 'post_categories.id', '=', 'post_post_category.post_category_id');
@@ -111,6 +111,15 @@ class NewsController extends Controller
         $postCategories = PostCategory::find($request['post_categories']);
         $post->post_categories()->attach($postCategories);
 
+        foreach ($request['post_items'] ?? array() as $key => $item):
+          $image = isset($item) && !empty($item) ? FileUpload::uploadImage("post_items.$key", $dimensions) : NULL;
+          $post->datastorage()->create([
+            'sort' => ++$key,
+            'type' => 'image',
+            'name' => $image,
+          ]);
+        endforeach;
+
         DB::commit();
         $response = response()->json($this->responseStore(true, route('backend.news.index')));
       } catch (\Throwable $throw) {
@@ -132,7 +141,7 @@ class NewsController extends Controller
       ['url' => '#', 'title' => "Edit Berita"],
     ];
 
-    $data = Post::with(['post_categories'])->findOrFail($id);
+    $data = Post::with(['post_categories', 'datastorage'])->findOrFail($id);
 
     return view('backend.news.edit', compact('page_breadcrumbs', 'config', 'data'));
   }
@@ -163,6 +172,16 @@ class NewsController extends Controller
         $postCategories = PostCategory::find($request['post_categories']);
         $post->post_categories()->sync($postCategories);
 
+        foreach ($request['post_items'] ?? array() as $key => $item):
+          $image = isset($item) && !empty($item) ? FileUpload::uploadImage("post_items.$key", $dimensions) : NULL;
+          $max = $post->datastorage()->max('sort');
+          $post->datastorage()->create([
+            'sort' => ++$max,
+            'type' => 'image',
+            'name' => $image,
+          ]);
+        endforeach;
+
         DB::commit();
         $response = response()->json($this->responseUpdate(true, route('backend.news.index')));
       } catch (\Throwable $throw) {
@@ -189,7 +208,8 @@ class NewsController extends Controller
     return $response;
   }
 
-  public function uploadimagecke(Request $request){
+  public function uploadimagecke(Request $request)
+  {
     if ($request->hasFile('upload')) {
       $originName = $request->file('upload')->getClientOriginalName();
       $fileName = pathinfo($originName, PATHINFO_FILENAME);
@@ -198,7 +218,7 @@ class NewsController extends Controller
       $dimensions = [['1280', '720', 'thumbnail']];
       $image = isset($request['upload']) && !empty($request['upload']) ? FileUpload::uploadImage('upload', $dimensions) : NULL;
 
-      return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => asset("/storage/images/original/".$image)]);
+      return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => asset("/storage/images/original/" . $image)]);
     }
   }
 

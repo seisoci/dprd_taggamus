@@ -79,10 +79,7 @@ class PhotoController extends Controller
       DB::beginTransaction();
       try {
         foreach ($request['data'] as $key => $item):
-          DataStorage::where([
-            ['storage_data_type', 'post'],
-            ['storage_data_id', $item],
-          ])->update([
+          DataStorage::find($item)->update([
             'sort' => ++$key
           ]);
         endforeach;
@@ -90,7 +87,6 @@ class PhotoController extends Controller
         DB::commit();
         $response = response()->json($this->responseUpdate(true));
       } catch (\Throwable $throw) {
-        dd($throw);
         Log::error($throw);
         DB::rollBack();
         $response = response()->json($this->responseUpdate(false));

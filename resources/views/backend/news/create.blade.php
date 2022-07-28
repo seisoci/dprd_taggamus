@@ -42,8 +42,8 @@
                 <label class="mx-0 text-bold d-block">Gambar Cover</label>
                 <img src="{{ asset('assets/img/svgs/no-content.svg') }}"
                      style="object-fit: cover; border: 1px solid #d9d9d9" class="mb-2 border-2 mx-auto"
-                     height="220px"
-                     width="100%" alt="">
+                     height="200px"
+                     width="200px" alt="">
                 <input type="file" class="image d-block" name="image" accept=".jpg, .jpeg, .png">
                 <p class="text-muted ms-75 mt-50"><small>Allowed JPG, JPEG or PNG. Max
                     size of
@@ -62,6 +62,28 @@
                   </label>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 items" id="items_1">
+              <div class="form-group">
+                <label class="mx-0 text-bold d-block">Isi Gambar</label>
+                <img src="{{ asset('assets/img/svgs/no-content.svg') }}"
+                     style="
+                     background-size: cover;
+                     background-position: center center;
+                     border: 1px solid #d9d9d9"
+                     class="mb-2 border-2 mx-auto"
+                     height="150px"
+                     width="150px">
+                <input type="file" class="image d-block" name="post_items[]" accept=".jpg, .jpeg, .png">
+                <p class="text-muted ms-75 mt-50"><small>Allowed JPG, JPEG or PNG. Max
+                    size of
+                    2000kB</small></p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-start pt-2">
+              <button type="button" id="btnAddPhoto" class="btn btn-sm btn-success">Tambah Gambar</button>
             </div>
           </div>
         </div>
@@ -86,6 +108,8 @@
   <script src="{{ asset('assets/plugins/flatpickr/flatpickr.js') }}"></script>
   <script>
     $(document).ready(function () {
+      initImage();
+
       ClassicEditor.create(document.querySelector("#editor"), {
         ckfinder: {
           uploadUrl: '{{route('backend.news.uploadimagecke').'?_token='.csrf_token()}}'
@@ -94,7 +118,6 @@
           shouldNotGroupWhenFull: true
         }
       });
-
 
       $("#formStore").submit(function (e) {
         e.preventDefault();
@@ -171,17 +194,47 @@
         }
       });
 
-      $(".image").change(function () {
-        let thumb = $(this).parent().find('img');
-        thumb.attr('src', '{{ asset('assets/img/svgs/no-content.svg') }}');
-        if (this.files && this.files[0]) {
-          let reader = new FileReader();
-          reader.onload = function (e) {
-            thumb.attr('src', e.target.result);
-          }
-          reader.readAsDataURL(this.files[0]);
+      $('#btnAddPhoto').on('click', function () {
+        let totalItems = $(".items").length;
+        if (totalItems < 100) {
+          let lastid = $(".items:last").attr("id");
+          let split_id = lastid.split("_");
+          let nextindex = Number(split_id[1]) + 1;
+          $(".items:last").after($(`<div class="col-md-3 items" id="items_${nextindex}">`).append(
+            $(`<div class='form-group'>`).append(
+              $(`<label class="mx-0 text-bold d-block">Gambar</label>`),
+              $(`<img src="{{ asset('assets/img/svgs/no-content.svg') }}" style="background-size: cover; background-position: center center; border: 1px solid #d9d9d9" class="mb-2 border-2 mx-auto" height="150" width="150px">`),
+              $(`<input type="file" class="image d-block" name="post_items[]" accept=".jpg, .jpeg, .png">`),
+              $(`<p class="text-muted ms-75 mt-50 mb-0"><small>Allowed JPG, JPEG or PNG. Max size of 2000kB</small></p>`),
+              $(`<button type="button" class="btn btn-sm btn-danger btnDelete">Hapus</button>`),
+            )
+          ));
+          initImage();
+        } else {
+          toastr.error('Maksimal Upload 100 Gambar', 'Failed !');
         }
       });
+
+      $('div').on('click', '.btnDelete', function () {
+        let id = $(this).parent().parent().attr("id");
+        let split_id = id.split("_");
+        let deleteindex = split_id[1];
+        $("#items_" + deleteindex).remove();
+      });
+
+      function initImage() {
+        $(".image").change(function () {
+          let thumb = $(this).parent().find('img');
+          thumb.attr('src', '{{ asset('assets/img/svgs/no-content.svg') }}');
+          if (this.files && this.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+              thumb.attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+          }
+        });
+      };
 
       $('input[name="publish_at"]').flatpickr({
         enableTime: true,

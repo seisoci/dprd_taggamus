@@ -44,6 +44,8 @@ Route::prefix('backend')->name('backend.')->middleware(['auth:web'])->group(func
   Route::post('galleries/{gallery}/photos/updateimage', [Backend\PhotoController::class, 'updateimage'])->name('photos.updateimage');
   Route::resource('galleries.photos', Backend\PhotoController::class);
 
+
+
   Route::get('dashboard', DefaultBackend\DashboardController::class)->name('dashboard.index');
   Route::get('roles/select2', [DefaultBackend\RoleController::class, 'select2'])->name('roles.select2');
   Route::resource('users', DefaultBackend\UserController::class);

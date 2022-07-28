@@ -71,7 +71,7 @@ class Post extends Model
 
   public function datastorage()
   {
-    return $this->morphMany(DataStorage::class, 'storagable', 'storage_data_type', 'storage_data_id');
+    return $this->morphMany(DataStorage::class, 'storagable', 'storage_data_type', 'storage_data_id')->orderBy('sort', 'asc');
   }
 
   protected function serializeDate(\DateTimeInterface $date)
