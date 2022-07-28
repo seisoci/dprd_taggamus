@@ -199,7 +199,6 @@ class NewsController extends Controller
   public function destroy($id)
   {
     $data = Post::find($id);
-    $data->taggables()->delete();
     $response = response()->json($this->responseDelete(true));
     if ($data->delete()) {
       Storage::disk('public')->delete(["images/original/$data->image", "images/thumbnail/$data->image"]);
@@ -221,5 +220,4 @@ class NewsController extends Controller
       return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => asset("/storage/images/original/" . $image)]);
     }
   }
-
 }

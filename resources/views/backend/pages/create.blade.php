@@ -3,7 +3,7 @@
 @section('content')
   <div class="col-lg-12 col-md-6">
     <div class="card custom-card">
-      <form id="formStore" action="{{ route('backend.news.store') }}">
+      <form id="formStore" action="{{ route('backend.pages.store') }}">
         @csrf
         <div class="card-body">
           <div id="errorCreate" class="mb-3" style="display:none;">

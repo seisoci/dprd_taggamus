@@ -4,7 +4,7 @@
     <div class="card">
       <div class="d-flex align-self-end m-4">
         <div>
-          <a class="btn btn-primary" href="{{ route('backend.news.create') }}">
+          <a class="btn btn-primary" href="{{ route('backend.jdih.create') }}">
             <i class="fe fe-plus"></i> Tambah
           </a>
         </div>
@@ -21,13 +21,6 @@
               </select>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="activeSelect">Kategori</label>
-              <select class="form-select" id="select2PostCategories" name="status">
-              </select>
-            </div>
-          </div>
         </div>
         <div class="table-responsive">
           <table class="table table-bordered border-bottom w-100" id="Datatable">
@@ -35,7 +28,6 @@
             <tr>
               <th>Image</th>
               <th>Judul</th>
-              <th>Kategori</th>
               <th>Status</th>
               <th>Tanggal Dipublish</th>
               <th>Pembuat</th>
@@ -86,7 +78,7 @@
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         pageLength: 10,
         ajax: {
-          url: "{{ route('backend.news.index') }}",
+          url: "{{ route('backend.jdih.index') }}",
           data: function (d) {
             d.published = $('#selectStatus').find(':selected').val();
             d.post_category_id = $('#select2PostCategories').find(':selected').val();
@@ -99,13 +91,12 @@
             className: 'text-center',
             render: function (data, type, full, meta) {
               if (data) {
-                return `<img src="/storage/images/thumbnail/${data}" style="width:150px; max-height: 150px;">`
+                return `<img class="rounded-circle" src="/storage/images/thumbnail/${data}" style="max-width:75px; max-height: 75px;">`
               }
-              return `<img src="/assets/img/svgs/no-content.svg" style="width:150px; max-height: 150px;">`
+              return `<img class="rounded-circle" src="/assets/img/svgs/no-content.svg" style="max-width:75px; max-height: 75px;">`
             },
           },
           {data: 'title', name: 'title'},
-          {data: 'post_category_name', name: 'post_categories.name'},
           {
             data: 'published',
             name: 'published',
@@ -181,28 +172,6 @@
             bsDelete.hide();
           }
         });
-      });
-
-
-      $('#select2PostCategories').select2({
-        placeholder: 'Cari Kategori Berita',
-        allowClear: true,
-        dropdownParent: $('#select2PostCategories').parent(),
-        width: '100%',
-        ajax: {
-          url: "{{ route('backend.post-categories.select2') }}",
-          dataType: "json",
-          cache: true,
-          data: function (e) {
-            return {
-              type: 'posts',
-              q: e.term || '',
-              page: e.page || 1
-            }
-          },
-        },
-      }).on('change', function () {
-        dataTable.draw();
       });
 
     });

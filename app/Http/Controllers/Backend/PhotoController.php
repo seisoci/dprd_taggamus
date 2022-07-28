@@ -102,7 +102,7 @@ class PhotoController extends Controller
     $data = DataStorage::find($photoId);
     $response = response()->json($this->responseDelete(true));
     if ($data->delete()) {
-      Storage::disk('public')->delete(["images/original/$data->image", "images/thumbnail/$data->image"]);
+      Storage::disk('public')->delete(["images/original/$data->name", "images/thumbnail/$data->name", "document/$data->name"]);
       $response = response()->json($this->responseDelete(true));
     }
     return $response;

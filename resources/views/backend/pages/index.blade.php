@@ -91,9 +91,9 @@
             className: 'text-center',
             render: function (data, type, full, meta) {
               if (data) {
-                return `<img class="rounded-circle" src="/storage/images/thumbnail/${data}" style="max-width:75px; max-height: 75px;">`
+                return `<img src="/storage/images/thumbnail/${data}" style="width:150px; height: 100px;">`
               }
-              return `<img class="rounded-circle" src="/assets/img/svgs/no-content.svg" style="max-width:75px; max-height: 75px;">`
+              return `<img src="/assets/img/svgs/no-content.svg" style="width:150px; height: 100px;">`
             },
           },
           {data: 'title', name: 'title'},

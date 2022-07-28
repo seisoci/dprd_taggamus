@@ -36,6 +36,7 @@ Route::prefix('backend')->name('backend.')->middleware(['auth:web'])->group(func
   Route::resource('sliders', Backend\SliderController::class);
   Route::post('news/uploadimagecke', [Backend\NewsController::class, 'uploadimagecke'])->name('news.uploadimagecke');
   Route::resource('news', Backend\NewsController::class);
+  Route::resource('jdih', Backend\JDIHController::class);
   Route::get('post-categories/select2', [Backend\PostCategoryController::class, 'select2'])->name('post-categories.select2');
   Route::resource('post-categories', Backend\PostCategoryController::class);
   Route::resource('pages', Backend\PageController::class);
