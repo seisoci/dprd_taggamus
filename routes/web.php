@@ -41,7 +41,10 @@ Route::prefix('backend')->name('backend.')->middleware(['auth:web'])->group(func
   Route::resource('post-categories', Backend\PostCategoryController::class);
   Route::resource('pages', Backend\PageController::class);
   Route::resource('videos', Backend\VideoController::class);
+  Route::resource('schedules', Backend\ScheduleController::class);
   Route::resource('galleries', Backend\GalleryController::class);
+  Route::resource('election-regions', Backend\ElectionRegionController::class);
+  Route::resource('komisi', Backend\KomisiController::class);
   Route::post('galleries/{gallery}/photos/updateimage', [Backend\PhotoController::class, 'updateimage'])->name('photos.updateimage');
   Route::resource('galleries.photos', Backend\PhotoController::class);
 

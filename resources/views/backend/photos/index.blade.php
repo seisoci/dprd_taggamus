@@ -25,7 +25,7 @@
       </div>
       <div id="footerImage" style="display: none" class="card-footer">
         <div class="d-flex justify-content-end">
-          <button id="btnUpdateImage" type="button" class="btn ripple btn-warning">Update Sort Gambar</button>
+          <button id="btnUpdateImage" type="button" class="btn ripple btn-warning">Update Sort</button>
         </div>
       </div>
     </div>
@@ -103,6 +103,7 @@
     $(document).ready(function () {
       let modalDelete = document.getElementById('modalDelete');
       const bsDelete = new bootstrap.Modal(modalDelete);
+
       var myDropzone = new Dropzone(".dropzone", {
         maxFilesize: 12,
         acceptedFiles: ".jpeg,.jpg,.png,.pdf",

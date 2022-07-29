@@ -94,7 +94,7 @@ class JDIHController extends Controller
       'title' => 'required|string',
       'post_categories' => 'nullable|array',
       'post_categories.*' => 'nullable|integer',
-      'image' => 'image|mimes:pdf|max:5000',
+      'image' => 'image|mimes:jpg,png,jpeg|max:5000',
       'status' => 'in:0,1',
     ]);
 
@@ -155,7 +155,7 @@ class JDIHController extends Controller
       'title' => 'required|string',
       'post_categories' => 'nullable|array',
       'post_categories.*' => 'nullable|integer',
-      'image' => 'image|mimes:jpg,png,jpeg|max:2048',
+      'image' => 'image|mimes:jpg,png,jpeg|max:5000',
       'status' => 'in:0,1',
     ]);
 

@@ -34,7 +34,7 @@
       </div>
       <div id="footerImage" style="display: none" class="card-footer">
         <div class="d-flex justify-content-end">
-          <button id="btnUpdateImage" type="button" class="btn ripple btn-warning">Update Sort Gambar</button>
+          <button id="btnUpdateImage" type="button" class="btn ripple btn-warning">Update Sort</button>
         </div>
       </div>
     </div>

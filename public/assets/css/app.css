@@ -13238,13 +13238,13 @@ div.dt-buttons a.btn.processing:after {
   box-shadow: none !important;
 }
 .ck.ck-button {
-  background: #fff !important;
+  background: #fff;
   border: 1px solid #e9edf4;
   border-radius: 5px;
 }
 
 a.ck.ck-button {
-  background: #fff !important;
+  background: #fff;
   border: 1px solid #e9edf4;
   border-radius: 5px;
 }

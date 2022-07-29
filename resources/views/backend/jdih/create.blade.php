@@ -91,8 +91,8 @@
   <link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet"/>
 @endsection
 @section('script')
-  <script src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
   <script src="{{ asset('assets/plugins/flatpickr/flatpickr.js') }}"></script>
+  <script src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
   <script>
     $(document).ready(function () {
       ClassicEditor.create(document.querySelector("#editor"), {
@@ -176,6 +176,18 @@
         let split_id = id.split("_");
         let deleteindex = split_id[1];
         $("#items_" + deleteindex).remove();
+      });
+
+      $(".image").change(function () {
+        let thumb = $(this).parent().find('img');
+        thumb.attr('src', '{{ asset('assets/img/svgs/no-content.svg') }}');
+        if (this.files && this.files[0]) {
+          let reader = new FileReader();
+          reader.onload = function (e) {
+            thumb.attr('src', e.target.result);
+          }
+          reader.readAsDataURL(this.files[0]);
+        }
       });
 
       $('input[name="publish_at"]').flatpickr({
