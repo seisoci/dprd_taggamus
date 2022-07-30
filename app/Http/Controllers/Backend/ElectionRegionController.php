@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\ElectionRegion;
+use App\Models\PostCategory;
 use App\Traits\ResponseStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -90,4 +91,34 @@ class ElectionRegionController extends Controller
     $signature->delete();
     return $this->responseDelete(true);
   }
+
+  public function select2(Request $request)
+  {
+    $page = $request->page;
+    $resultCount = 10;
+    $offset = ($page - 1) * $resultCount;
+    $data = ElectionRegion::where('name', 'LIKE', '%' . $request->q . '%')
+      ->orderBy('name')
+      ->skip($offset)
+      ->take($resultCount)
+      ->selectRaw('id, name as text')
+      ->get();
+
+    $count = ElectionRegion::where('name', 'LIKE', '%' . $request->q . '%')
+      ->get()
+      ->count();
+
+    $endCount = $offset + $resultCount;
+    $morePages = $count > $endCount;
+
+    $results = array(
+      "results" => $data,
+      "pagination" => array(
+        "more" => $morePages
+      )
+    );
+
+    return response()->json($results);
+  }
+
 }

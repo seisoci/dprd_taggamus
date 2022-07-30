@@ -21,7 +21,6 @@ return new class extends Migration {
       $table->foreignId('komisi_id')->nullable()->constrained()->on('komisis')->onUpdate('cascade')->onDelete('cascade');
       $table->foreignId('election_region_id')->nullable()->constrained()->on('election_regions')->onUpdate('cascade')->onDelete('cascade');
       $table->string('religion')->nullable();
-      $table->string('fraksi')->nullable();
       $table->string('partai')->nullable();
       $table->string('period')->nullable();
       $table->string('image')->nullable();

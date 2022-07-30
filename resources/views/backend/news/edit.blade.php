@@ -81,7 +81,7 @@
                 <input type="file" class="image d-block" name="image" accept=".jpg, .jpeg, .png">
                 <p class="text-muted ms-75 mt-50"><small>Allowed JPG, JPEG or PNG. Max
                     size of
-                    5000kB</small></p>
+                    5MB</small></p>
               </div>
               <div class="form-group">
                 <label for="">Status</label>
@@ -115,7 +115,7 @@
                 <input type="file" class="image d-block" name="post_items[]" accept=".jpg, .jpeg, .png">
                 <p class="text-muted ms-75 mt-50"><small>Allowed JPG, JPEG or PNG. Max
                     size of
-                    2000kB</small></p>
+                    5MB</small></p>
               </div>
             </div>
             <div class="d-flex justify-content-start pt-2">
@@ -293,7 +293,7 @@
               $(`<label class="mx-0 text-bold d-block">Gambar</label>`),
               $(`<img src="{{ asset('assets/img/svgs/no-content.svg') }}" style="background-size: cover; background-position: center center; border: 1px solid #d9d9d9" class="mb-2 border-2 mx-auto" height="150px" width="150px">`),
               $(`<input type="file" class="image d-block" name="post_items[]" accept=".jpg, .jpeg, .png">`),
-              $(`<p class="text-muted ms-75 mt-50 mb-0"><small>Allowed JPG, JPEG or PNG. Max size of 2000kB</small></p>`),
+              $(`<p class="text-muted ms-75 mt-50 mb-0"><small>Allowed JPG, JPEG or PNG. Max size of 5MB</small></p>`),
               $(`<button type="button" class="btn btn-sm btn-danger btnDelete">Hapus</button>`),
             )
           ));

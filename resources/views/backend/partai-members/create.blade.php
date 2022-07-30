@@ -3,7 +3,7 @@
 @section('content')
   <div class="col-lg-12 col-md-6">
     <div class="card custom-card">
-      <form id="formStore" action="{{ route('backend.galleries.store') }}">
+      <form id="formStore" action="{{ route('backend.partai-member.store') }}">
         @csrf
         <div class="card-body">
           <div id="errorCreate" class="mb-3" style="display:none;">
@@ -13,46 +13,67 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-12 col-md-8">
-              <input type="hidden" name="type" value="galleries">
+            <div class="col-12">
               <div class="form-group">
-                <label>Judul</label>
-                <input type="text" name="title" class="form-control">
-              </div>
-              <div class="form-group">
-                <label class="mx-0 text-bold d-block">Gambar Cover</label>
+                <label class="mx-0 text-bold d-block">Foto</label>
                 <img src="{{ asset('assets/img/svgs/no-content.svg') }}"
                      style="object-fit: cover; border: 1px solid #d9d9d9" class="mb-2 border-2 mx-auto"
-                     height="250px"
-                     width="100%" alt="">
+                     height="300px"
+                     width="220px" alt="">
                 <input type="file" class="image d-block" name="image" accept=".jpg, .jpeg, .png">
                 <p class="text-muted ms-75 mt-50"><small>Allowed JPG, JPEG or PNG. Max
                     size of
                     5MB</small></p>
               </div>
             </div>
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-6">
               <div class="form-group">
-                <label for="">Tanggal</label>
-                <div class="input-group">
-                  <span class="input-group-text" id="publish_at"><i class="fa-regular fa-calendar"></i></span>
-                  <input type="text" name="publish_at" class="form-control datePicker" aria-describedby="publish_at"
-                         value="{{ \Carbon\Carbon::now()->toDateTimeString() }}"
-                         readonly>
-                </div>
+                <label>Nama Anggota</label>
+                <input type="text" name="name" class="form-control">
               </div>
               <div class="form-group">
-                <label for="">Status</label>
-                <div class="custom-controls-stacked">
-                  <label class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" name="published" value="0" checked>
-                    <span class="custom-control-label">Draft</span>
-                  </label>
-                  <label class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" name="published" value="1">
-                    <span class="custom-control-label">Publish</span>
-                  </label>
-                </div>
+                <label>Jabatan</label>
+                <input type="text" name="position" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Tempat, Tanggal Lahir</label>
+                <input type="text" name="place_birth" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>No. Anggota</label>
+                <input type="text" name="no_member" class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group">
+                <label>Daerah Pemilihan</label>
+                <select id="select2ElectionRegion" class="form-control" name="election_region_id">
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Komisi</label>
+                <select id="select2Komisi" class="form-control" name="komisi_id">
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Agama</label>
+                <select class="form-select" name="religion">
+                  <option value="ISLAM">ISLAM</option>
+                  <option value="KRISTEN">KRISTEN</option>
+                  <option value="PROTESTAN">PROTESTAN</option>
+                  <option value="HINDU">HINDU</option>
+                  <option value="BUDHA">BUDHA</option>
+                  <option value="KONGHUCU">KONGHUCU</option>
+                  <option value="LAIN-LAIN">LAIN-LAIN</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Partai</label>
+                <input type="text" name="partai" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Priode</label>
+                <input type="text" name="period" class="form-control">
               </div>
             </div>
           </div>
@@ -71,7 +92,6 @@
 @endsection
 
 @section('css')
-  <link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet"/>
 @endsection
 @section('script')
   <script src="{{ asset('assets/plugins/flatpickr/flatpickr.js') }}"></script>
@@ -137,11 +157,40 @@
         }
       });
 
-      $('input[name="publish_at"]').flatpickr({
-        enableTime: true,
-        dateFormat: "Y-m-d H:i:s",
-        time_24hr: true,
+      $("#select2ElectionRegion").select2({
+        placeholder: 'Pilih Pemilihan Daerah',
+        width: '100%',
+        ajax: {
+          url: "{{route('backend.election-regions.select2')}}",
+          dataType: 'json',
+          delay: 100,
+          cache: true,
+          data: function (params) {
+            return {
+              q: params.term,
+              page: params.page || 1
+            };
+          },
+        },
       });
+
+      $("#select2Komisi").select2({
+        placeholder: 'Pilih Komisi',
+        width: '100%',
+        ajax: {
+          url: "{{route('backend.komisi.select2')}}",
+          dataType: 'json',
+          delay: 100,
+          cache: true,
+          data: function (params) {
+            return {
+              q: params.term,
+              page: params.page || 1
+            };
+          }
+        },
+      });
+
 
     });
   </script>

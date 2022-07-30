@@ -89,7 +89,7 @@
                 <input type="file" class="image d-block" name="image" accept=".jpg, .jpeg, .png">
                 <p class="text-muted ms-75 mt-50"><small>Allowed JPG, JPEG or PNG. Max
                     size of
-                    5000kB</small></p>
+                    5MB</small></p>
               </div>
               <div class="form-group">
                 <label for="">Status</label>
@@ -115,7 +115,7 @@
                 <input type="file" class="d-block" name="post_items[]" accept=".pdf">
                 <p class="text-muted ms-75 mt-50"><small>Allowed PDF Max
                     size of
-                    5000kB</small></p>
+                    5MB</small></p>
               </div>
             </div>
             <div class="d-flex justify-content-start pt-2">
@@ -291,7 +291,7 @@
             $(`<div class='form-group'>`).append(
               $(`<label class="mx-0 text-bold d-block">Isi Dokumen</label>`),
               $(`<input type="file" class="image d-block" name="post_items[]" accept=".pdf">`),
-              $(`<p class="text-muted ms-75 mt-50 mb-0"><small>Allowed PNG 5000kB</small></p>`),
+              $(`<p class="text-muted ms-75 mt-50 mb-0"><small>Allowed PNG 5MB</small></p>`),
               $(`<button type="button" class="btn btn-sm btn-danger btnDelete">Hapus</button>`),
             )
           ));

@@ -15,7 +15,7 @@
             <input type="file" class="image d-block" name="favicon" accept=".jpg, .jpeg, .png">
             <p class="text-muted ml-75 mt-50"><small>Allowed JPG, JPEG or PNG. Max
                 size of
-                2000kB</small></p>
+                5MB</small></p>
           </div>
           <div class="form-group">
             <label class="mx-0 text-bold d-block">Logo Tema Putih</label>
@@ -26,7 +26,7 @@
             <input type="file" class="image d-block" name="logo_white" accept=".jpg, .jpeg, .png">
             <p class="text-muted ml-75 mt-50"><small>Allowed JPG, JPEG or PNG. Max
                 size of
-                2000kB</small></p>
+                5MB</small></p>
           </div>
           <div class="form-group">
             <label class="mx-0 text-bold d-block">Logo Tema Hitam</label>
@@ -37,7 +37,7 @@
             <input type="file" class="image d-block" name="logo_black" accept=".jpg, .jpeg, .png">
             <p class="text-muted ml-75 mt-50"><small>Allowed JPG, JPEG or PNG. Max
                 size of
-                2000kB</small></p>
+                5MB</small></p>
           </div>
           <div class="card-footer">
             <div class="d-flex justify-content-end">

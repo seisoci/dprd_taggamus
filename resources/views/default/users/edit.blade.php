@@ -24,7 +24,7 @@
               <input type="file" class="image d-block" name="image" accept=".jpg, .jpeg, .png">
               <p class="text-muted ms-75 mt-50"><small>Allowed JPG, JPEG or PNG. Max
                   size of
-                  2000kB</small></p>
+                  5MB</small></p>
             </div>
             <div class="form-group">
               <label>Nama Lengkap <span class="text-danger">*</span></label>

@@ -30,7 +30,7 @@
                 <input type="file" class="image d-block" name="image" accept=".jpg, .jpeg, .png">
                 <p class="text-muted ms-75 mt-50"><small>Allowed JPG, JPEG or PNG. Max
                     size of
-                    5000kB</small></p>
+                    5MB</small></p>
               </div>
             </div>
             <div class="col-sm-12 col-md-4">

@@ -3,7 +3,7 @@
 @section('content')
   <div class="col-lg-12 col-md-6">
     <div class="card custom-card">
-      <form id="formUpdate" action="{{ route('backend.pages.update', $data['id']) }}">
+      <form id="formUpdate" action="{{ route('backend.partai-member.update', $data['id']) }}">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         @method('PUT')
         <div class="card-body">
@@ -14,52 +14,75 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-12 col-md-8">
-              <input type="hidden" name="type" value="pages">
+            <div class="col-12">
               <div class="form-group">
-                <label>Judul</label>
-                <input type="text" name="title" class="form-control" value="{{ $data['title'] ?? '' }}">
-              </div>
-              <div class="editor-container">
-                <textarea name="body" id="editor">{!! $data['body'] ?? '' !!}</textarea>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-4">
-              <div class="form-group">
-                <label for="">Tanggal</label>
-                <div class="input-group">
-                  <span class="input-group-text" id="publish_at"><i class="fa-regular fa-calendar"></i></span>
-                  <input type="text" name="publish_at" class="form-control datePicker" aria-describedby="publish_at"
-                         value="{{ $data['publish_at'] ?? \Carbon\Carbon::now()->toDateTimeString() }}"
-                         readonly>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="mx-0 text-bold d-block">Gambar Cover</label>
+                <label class="mx-0 text-bold d-block">Foto</label>
                 <img
-                  src="{{ $data['image'] != NULL ? asset("/storage/images/original/".$data['image']) : asset('assets/img/svgs/no-content.svg') }}"
-                  style="object-fit: cover; border: 1px solid #d9d9d9" class="mb-2 border-2 mx-auto"
-                  height="220px"
-                  width="100%" alt="">
+                    src="{{ $data['image'] != NULL ? asset("/storage/images/original/".$data['image']) : asset('assets/img/svgs/no-content.svg') }}"
+                     style="object-fit: cover; border: 1px solid #d9d9d9" class="mb-2 border-2 mx-auto"
+                     height="300px"
+                     width="220px" alt="">
                 <input type="file" class="image d-block" name="image" accept=".jpg, .jpeg, .png">
                 <p class="text-muted ms-75 mt-50"><small>Allowed JPG, JPEG or PNG. Max
                     size of
                     5MB</small></p>
               </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
               <div class="form-group">
-                <label for="">Status</label>
-                <div class="custom-controls-stacked">
-                  <label class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" name="published"
-                           value="0" {{ !$data['published'] == 1 ? 'checked' : '' }}>
-                    <span class="custom-control-label">Draft</span>
-                  </label>
-                  <label class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" name="published"
-                           value="1" {{ $data['published'] == 1 ? 'checked' : '' }}>
-                    <span class="custom-control-label">Publish</span>
-                  </label>
-                </div>
+                <label>Nama Anggota</label>
+                <input type="text" name="name" class="form-control" value="{{ $data['name'] ?? '' }}">
+              </div>
+              <div class="form-group">
+                <label>Jabatan</label>
+                <input type="text" name="position" class="form-control" value="{{ $data['position'] ?? '' }}">
+              </div>
+              <div class="form-group">
+                <label>Tempat, Tanggal Lahir</label>
+                <input type="text" name="place_birth" class="form-control" value="{{ $data['place_birth'] ?? '' }}">
+              </div>
+              <div class="form-group">
+                <label>No. Anggota</label>
+                <input type="text" name="no_member" class="form-control" value="{{ $data['no_member'] ?? '' }}">
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group">
+                <label>Daerah Pemilihan</label>
+                <select id="select2ElectionRegion" class="form-control" name="election_region_id">
+                  @if(isset($data['election_region_id']))
+                    <option value="{{ $data['election_region_id'] }}" selected>{{ $data['election_region']['name'] ?? '' }}</option>
+                  @endif
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Komisi</label>
+                <select id="select2Komisi" class="form-control" name="komisi_id">
+                  @if(isset($data['komisi_id']))
+                    <option value="{{ $data['komisi_id'] }}" selected>{{ $data['komisi']['name'] ?? '' }}</option>
+
+                  @endif
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Agama</label>
+                <select class="form-select" name="religion">
+                  <option value="ISLAM" {{ $data['religion'] == 'ISLAM' ? 'selected' : '' }}>ISLAM</option>
+                  <option value="KRISTEN" {{ $data['religion'] == 'KRISTEN' ? 'selected' : '' }}>KRISTEN</option>
+                  <option value="PROTESTAN" {{ $data['religion'] == 'PROTESTAN' ? 'selected' : '' }}>PROTESTAN</option>
+                  <option value="HINDU" {{ $data['religion'] == 'HINDU' ? 'selected' : '' }}>HINDU</option>
+                  <option value="BUDHA" {{ $data['religion'] == 'BUDHA' ? 'selected' : '' }}>BUDHA</option>
+                  <option value="KONGHUCU" {{ $data['religion'] == 'KONGHUCU' ? 'selected' : '' }}>KONGHUCU</option>
+                  <option value="LAIN-LAIN" {{ $data['religion'] == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Partai</label>
+                <input type="text" name="partai" class="form-control" value="{{ $data['partai'] ?? '' }}">
+              </div>
+              <div class="form-group">
+                <label>Priode</label>
+                <input type="text" name="period" class="form-control" value="{{ $data['period'] ?? '' }}">
               </div>
             </div>
           </div>
@@ -125,7 +148,7 @@
                 if (!response.redirect || response.redirect === "reload") {
                   location.reload();
                 } else {
-                  location.href = '{{ route('backend.pages.index') }}';
+                  location.href = response.redirect;
                 }
               }, 1000);
             } else {

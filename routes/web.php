@@ -43,7 +43,10 @@ Route::prefix('backend')->name('backend.')->middleware(['auth:web'])->group(func
   Route::resource('videos', Backend\VideoController::class);
   Route::resource('schedules', Backend\ScheduleController::class);
   Route::resource('galleries', Backend\GalleryController::class);
+  Route::resource('partai-member', Backend\PartaiMemberController::class);
+  Route::get('election-regions/select2', [Backend\ElectionRegionController::class, 'select2'])->name('election-regions.select2');
   Route::resource('election-regions', Backend\ElectionRegionController::class);
+  Route::get('komisi/select2', [Backend\KomisiController::class, 'select2'])->name('komisi.select2');
   Route::resource('komisi', Backend\KomisiController::class);
   Route::post('galleries/{gallery}/photos/updateimage', [Backend\PhotoController::class, 'updateimage'])->name('photos.updateimage');
   Route::resource('galleries.photos', Backend\PhotoController::class);
@@ -63,13 +66,6 @@ Route::prefix('backend')->name('backend.')->middleware(['auth:web'])->group(func
   Route::get('banks/select2', [Backend\BankController::class, 'select2'])->name('banks.select2');
   Route::apiResource('banks', Backend\BankController::class);
   Route::apiResource('signature', Backend\SignatureController::class);
-  Route::apiResource('uploadfile_jalin_rekapdebit', Backend\UploadRekapJalinController::class);
-  Route::apiResource('uploadfile_jalin_clearing', Backend\UploadClearingJalinController::class);
-  Route::apiResource('uploadfile_jalin_klaim', Backend\UploadKlaimJalinController::class);
-  Route::apiResource('uploadfile_jalin_harian', Backend\UploadHarianJalinController::class);
-  Route::apiResource('jalin_klaim', Backend\JalinKlaimController::class);
-  Route::apiResource('jalin_clearing', Backend\JalinClearingController::class);
-  Route::apiResource('jalin_harian', Backend\JalinHarianController::class);
 
 });
 
