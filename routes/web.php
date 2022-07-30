@@ -50,6 +50,12 @@ Route::prefix('backend')->name('backend.')->middleware(['auth:web'])->group(func
   Route::resource('komisi', Backend\KomisiController::class);
   Route::post('galleries/{gallery}/photos/updateimage', [Backend\PhotoController::class, 'updateimage'])->name('photos.updateimage');
   Route::resource('galleries.photos', Backend\PhotoController::class);
+  Route::resource('partai-member.educations', Backend\EducationController::class);
+  Route::resource('partai-member.professions', Backend\ProfessionController::class);
+  Route::resource('partai-member.organizations', Backend\OrganizationController::class);
+  Route::resource('partai-member.movements', Backend\MovementController::class);
+  Route::resource('partai-member.awards', Backend\AwardController::class);
+
 
 
 

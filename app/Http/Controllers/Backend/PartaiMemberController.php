@@ -42,10 +42,6 @@ class PartaiMemberController extends Controller
         ->join('komisis', 'komisis.id', '=', 'partai_members.komisi_id')
         ->join('election_regions', 'election_regions.id', '=', 'partai_members.election_region_id');
 
-//      if ($request->filled('published')) {
-//        $data->where('posts.published', request('published'));
-//      }
-
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
@@ -55,6 +51,7 @@ class PartaiMemberController extends Controller
               Aksi <i class="fa-regular fa-arrow-down"></i>
             </button>
             <ul class="dropdown-menu">
+              <li><a href="' . route('backend.partai-member.educations.index', $row['id']) . '" class="dropdown-item">Detail</a></li>
               <li><a href="' . route('backend.partai-member.edit', $row['id']) . '" class="dropdown-item">Ubah</a></li>
               <li><a href="#" data-bs-toggle="modal" data-bs-target="#modalDelete" data-bs-id="' . $row->id . '" class="delete dropdown-item">Hapus</a></li>
             </ul>
@@ -153,6 +150,17 @@ class PartaiMemberController extends Controller
     }
 
     return $response;
+  }
+
+  public function show($id){
+    $config['page_title'] = "Detail Anggota Partai";
+    $page_breadcrumbs = [
+      ['url' => route('backend.partai-member.index'), 'title' => "Anggota Partai"],
+      ['url' => '#', 'title' => "Detail Anggota Partai"],
+    ];
+
+    return view('backend.partai-members.show', compact('page_breadcrumbs', 'config', 'id'));
+
   }
 
   public function destroy($id)

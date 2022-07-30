@@ -31,4 +31,24 @@ class PartaiMember extends Model
   {
     return $this->belongsTo(ElectionRegion::class);
   }
+
+  public function education()
+  {
+    return $this->hasMany(Education::class);
+  }
+
+  public function organization()
+  {
+    return $this->hasMany(Organization::class);
+  }
+
+  public function movement()
+  {
+    return $this->hasMany(Movement::class);
+  }
+
+  public function profession()
+  {
+    return $this->hasMany(Profession::class);
+  }
 }
