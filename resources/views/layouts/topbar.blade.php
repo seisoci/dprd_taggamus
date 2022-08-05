@@ -65,6 +65,9 @@
               <div class="dropdown d-flex profile-1">
                 <a href="javascript:void(0)" data-bs-toggle="dropdown"
                    class="nav-link leading-none d-flex">
+                  <img
+                    src="{{ auth()->user()->image != NULL ? asset("/storage/images/original/".auth()->user()->image) : asset('assets/img/svgs/no-content.svg') }}"
+                    alt="profile-user" class="avatar  profile-user bg-round cover-image">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                   <div class="drop-heading">
