@@ -43,6 +43,7 @@ class NewsController extends Controller
         `users`.`name` AS `profile_name`,
          GROUP_CONCAT(`post_categories`.`name`) AS `post_category_name`
       ')
+        ->withCount('visitLogs')
         ->where('posts.type', 'posts')
         ->leftJoin('users', 'users.id', '=', 'posts.user_id')
         ->leftJoin('post_post_category', function ($join) {

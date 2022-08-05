@@ -1,3 +1,3 @@
 <div id="global-loader">
-    <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+    <img src="{{ asset('assets/img/loader.svg') }}" class="loader-img" alt="Loader">
 </div>

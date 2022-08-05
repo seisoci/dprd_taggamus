@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Setting extends Model
+class PollingAnswer extends Model
 {
   use HasFactory;
 
   protected $fillable = [
-    'name',
-    'description',
-    'type',
-    'value'
+    'polling_id',
+    'polling_option_id',
+    'ip_address',
   ];
 }

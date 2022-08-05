@@ -2,17 +2,20 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Shetabit\Visitor\Traits\Visitable;
+use Shetabit\Visitor\Traits\Visitor;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Support\Str;
 
 class Post extends Model
 {
-  use HasFactory, HasSlug;
+  use HasFactory, HasSlug, Visitor, Visitable;
 
   protected $fillable = [
     'user_id',

@@ -22,7 +22,7 @@
 <body class="app sidebar-mini ltr">
 
 <!-- GLOBAL-LOADER -->
-{{--@include('layouts.preloader')--}}
+@include('layouts.preloader')
 <!-- /GLOBAL-LOADER -->
 
 <!-- PAGE -->
@@ -39,10 +39,10 @@
             <div class="app-sidebar">
                 <div class="side-header" style="z-index: 999;">
                     <a class="header-brand1" href="{{ Auth::user()->roles->dashboard_url }}">
-                        <img src="/assets/img/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
-                        <img src="{{ asset('storage/images/thumbnail/favicon.png') }}" class="header-brand-img toggle-logo" alt="logo">
-                        <img src="{{ asset('storage/images/thumbnail/favicon.png') }}" class="header-brand-img light-logo" alt="logo">
-                        <img src="{{ asset('storage/images/thumbnail/logo-light.png') }}"  style="width: 130px; height: 110px" class="header-brand-img light-logo1" alt="logo">
+                        <img src="/assets/img/brand/logo-small.png" class="header-brand-img desktop-logo" alt="logo">
+                        <img src="{{ asset('assets/img/brand/logo-small.png') }}" class="header-brand-img toggle-logo" alt="logo">
+                        <img src="{{ asset('assets/img/brand/logo-small.png') }}" class="header-brand-img light-logo" alt="logo">
+                        <img src="{{ asset('assets/img/brand/logo-small.png') }}"  style="width: 50px; height: 50px" class="header-brand-img light-logo1" alt="logo">
                     </a>
                     <!-- LOGO -->
                 </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend as Backend;
+use App\Http\Controllers\Frontend as Frontend;
 use App\Http\Controllers\Default as DefaultBackend;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,8 @@ Route::prefix('backend')->name('backend.')->group(function () {
 });
 
 Route::prefix('backend')->name('backend.')->middleware(['auth:web'])->group(function () {
-  Route::get('dashboard', DefaultBackend\DashboardController::class)->name('dashboard.index');
+  Route::get('dashboard', [DefaultBackend\DashboardController::class, 'index'])->name('dashboard.index');
+  Route::get('dashboard/detail', [DefaultBackend\DashboardController::class, 'show'])->name('dashboard.show');
   Route::resource('guestbooks', Backend\GuestBookController::class);
   Route::put('sliders/updateimage', [Backend\SliderController::class, 'updateimage'])->name('sliders.update-image');
   Route::resource('sliders', Backend\SliderController::class);
@@ -55,11 +57,6 @@ Route::prefix('backend')->name('backend.')->middleware(['auth:web'])->group(func
   Route::resource('partai-member.organizations', Backend\OrganizationController::class);
   Route::resource('partai-member.movements', Backend\MovementController::class);
   Route::resource('partai-member.awards', Backend\AwardController::class);
-
-
-
-
-  Route::get('dashboard', DefaultBackend\DashboardController::class)->name('dashboard.index');
   Route::get('roles/select2', [DefaultBackend\RoleController::class, 'select2'])->name('roles.select2');
   Route::resource('users', DefaultBackend\UserController::class);
   Route::resource('roles', DefaultBackend\RoleController::class);
@@ -68,12 +65,12 @@ Route::prefix('backend')->name('backend.')->middleware(['auth:web'])->group(func
   Route::resource('menupermissions', DefaultBackend\MenuPermissionController::class)->except('create', 'edit', 'show');
   Route::post('menu/changeHierarchy', [DefaultBackend\MenuManagerController::class, 'changeHierarchy'])->name('menu.changeHierarchy');
   Route::resource('menu', DefaultBackend\MenuManagerController::class)->except('create', 'show');
-  Route::resource('settings', DefaultBackend\SettingController::class)->only('index', 'store');
   Route::get('banks/select2', [Backend\BankController::class, 'select2'])->name('banks.select2');
   Route::apiResource('banks', Backend\BankController::class);
   Route::apiResource('signature', Backend\SignatureController::class);
-
+  Route::resource('pollings', Backend\PollingController::class);
+  Route::resource('settings', Backend\SettingController::class);
 });
 
-
+Route::get('berita/{slug}', [Frontend\NewsController::class, 'show'])->name('pages.show');
 

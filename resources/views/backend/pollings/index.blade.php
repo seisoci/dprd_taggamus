@@ -1,56 +1,27 @@
 @extends('layouts.master')
+
 @section('content')
   <div class="col-lg-12">
     <div class="card">
       <div class="d-flex align-self-end m-4">
         <div>
-          <a class="btn btn-primary" href="{{ route('backend.news.create') }}">
+          <a class="btn btn-primary" href="{{ route('backend.pollings.create') }}">
             <i class="fe fe-plus"></i> Tambah
           </a>
         </div>
       </div>
       <div class="card-body">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="activeSelect">Status Publish</label>
-              <select class="form-select select2" id="selectStatus" name="status">
-                <option value="">Semua</option>
-                <option value="0">Draft</option>
-                <option value="1">Published</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="activeSelect">Kategori</label>
-              <select class="form-select" id="select2PostCategories" name="status">
-              </select>
-            </div>
-          </div>
-        </div>
         <div class="table-responsive">
           <table class="table table-bordered border-bottom w-100" id="Datatable">
             <thead>
             <tr>
-              <th>Image</th>
               <th>Judul</th>
-              <th>Kategori</th>
+              <th>Deskripsi</th>
               <th>Status</th>
               <th>Tanggal Dipublish</th>
-              <th>Pembuat</th>
-              <th>Dilihat</th>
               <th>Aksi</th>
             </tr>
             </thead>
-            <tfoot>
-              <tr>
-                <th colspan="5"></th>
-                <th>Total</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </tfoot>
           </table>
         </div>
       </div>
@@ -91,33 +62,21 @@
         scrollX: false,
         processing: true,
         serverSide: true,
-        order: [[4, 'desc']],
+        order: [[3, 'desc']],
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         pageLength: 10,
         ajax: {
-          url: "{{ route('backend.news.index') }}",
+          url: "{{ route('backend.pollings.index') }}",
           data: function (d) {
             d.published = $('#selectStatus').find(':selected').val();
-            d.post_category_id = $('#select2PostCategories').find(':selected').val();
           }
         },
         columns: [
-          {
-            data: 'image',
-            name: 'image',
-            className: 'text-center',
-            render: function (data, type, full, meta) {
-              if (data) {
-                return `<img src="/storage/images/thumbnail/${data}" style="width:150px; max-height: 150px;">`
-              }
-              return `<img src="/assets/img/svgs/no-content.svg" style="width:150px; max-height: 150px;">`
-            },
-          },
           {data: 'title', name: 'title'},
-          {data: 'post_category_name', name: 'post_categories.name'},
+          {data: 'description', name: 'description'},
           {
-            data: 'published',
-            name: 'published',
+            data: 'status',
+            name: 'status',
             className: 'text-center',
             render: function (data, type, full, meta) {
               let status = {
@@ -137,32 +96,8 @@
             className: 'text-end',
             width: '110px'
           },
-          {
-            data: 'profile_name',
-            name: 'users.name',
-          },
-          {
-            data: 'visit_logs_count',
-            name: 'visit_logs_count',
-            className: 'text-center',
-          },
           {data: 'action', name: 'action', className: 'text-center', orderable: false, searchable: false},
         ],
-        footerCallback: function (row, data, start, end, display) {
-          var api = this.api();
-          var intVal = function (i) {
-            return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
-          };
-
-          let total = api
-            .column(6)
-            .data()
-            .reduce(function (a, b) {
-              return intVal(a) + intVal(b);
-            }, 0);
-
-          $(api.column(6).footer()).html(`${total}`);
-        },
       });
 
       $('#selectStatus').on('change', function () {
@@ -172,7 +107,7 @@
       modalDelete.addEventListener('show.bs.modal', function (event) {
         let button = event.relatedTarget
         let id = button.getAttribute('data-bs-id');
-        this.querySelector('.urlDelete').setAttribute('href', '{{ route("backend.news.index") }}/' + id);
+        this.querySelector('.urlDelete').setAttribute('href', '{{ route("backend.pollings.index") }}/' + id);
       });
 
       modalDelete.addEventListener('hidden.bs.modal', function (event) {
@@ -210,28 +145,6 @@
             bsDelete.hide();
           }
         });
-      });
-
-
-      $('#select2PostCategories').select2({
-        placeholder: 'Cari Kategori Berita',
-        allowClear: true,
-        dropdownParent: $('#select2PostCategories').parent(),
-        width: '100%',
-        ajax: {
-          url: "{{ route('backend.post-categories.select2') }}",
-          dataType: "json",
-          cache: true,
-          data: function (e) {
-            return {
-              type: 'posts',
-              q: e.term || '',
-              page: e.page || 1
-            }
-          },
-        },
-      }).on('change', function () {
-        dataTable.draw();
       });
 
     });
