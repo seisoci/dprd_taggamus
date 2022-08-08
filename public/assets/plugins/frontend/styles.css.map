@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles.scss","styles.css"],"names":[],"mappings":"AAAA,EACI,UCCJ","file":"styles.css","sourcesContent":["p{\n    color: blue;\n}","p {\n  color: blue;\n}"]}
