@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <div class="col-lg-12">
     <div class="card custom-card overflow-hidden">
       <div class="card-header justify-content-between">
@@ -198,11 +199,12 @@
 
       $.fn.editable.defaults.mode = 'inline';
       $.fn.editable.defaults.inputclass = 'form-control form-control-sm';
+
       $(".editable").editable({
         ajaxOptions: {
-          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
           type: "POST",
           dataType: "json",
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         },
         success: function (response) {
           if (response.status == "success") {

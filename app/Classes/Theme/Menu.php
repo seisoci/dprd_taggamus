@@ -3,6 +3,7 @@
 namespace App\Classes\Theme;
 
 use App\Models\MenuManager;
+use App\Models\Setting;
 use App\Models\Theme;
 use Illuminate\Support\Facades\Auth;
 
@@ -84,6 +85,12 @@ class Menu
     }
     $html .= '</ul>';
     return $html;
+  }
+
+  public static function settings()
+  {
+    $settings = Setting::all()->keyBy('name');
+    return $settings;
   }
 
 }

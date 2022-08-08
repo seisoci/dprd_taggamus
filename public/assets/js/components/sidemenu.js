@@ -16,7 +16,6 @@
     var pageUrl = $this.attr("href").split("/").slice(-1)[0].replace(/^\/|\/$/g, '');
     if (pageUrl) {
       if (position[position.length - 1] == pageUrl) {
-        console.log($(this));
         $(this).addClass("active");
         $(this).parent().addClass("is-expanded");
         $(this).parent().parent().prev().addClass("active");

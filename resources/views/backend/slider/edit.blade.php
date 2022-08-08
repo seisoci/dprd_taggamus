@@ -15,7 +15,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6">
+  {{--          <div class="col-md-6">
               <div class="form-group">
                 <label>Title</label>
                 <input type="text" name="title" class="form-control" value="{{ $data['title'] ?? '' }}">
@@ -26,7 +26,7 @@
                 <label>Sub Title</label>
                 <input type="text" name="sub_title" class="form-control" value="{{ $data['sub_title'] ?? '' }}">
               </div>
-            </div>
+            </div>--}}
             <div class="col-md-6">
               <div id="items_1" class="form-group items">
                 <label class="mx-0 text-bold d-block">Gambar</label>

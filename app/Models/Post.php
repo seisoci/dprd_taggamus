@@ -42,12 +42,12 @@ class Post extends Model
     parent::boot();
     static::creating(function ($item) {
       $item->user_id = Auth::user()->id;
-      $item->synopsis = Str::limit(strip_tags($item->body), 50);
+      $item->synopsis = Str::limit(strip_tags($item->body), 150);
     });
 
     static::updating(function ($item) {
       $item->user_id = Auth::user()->id;
-      $item->synopsis = Str::limit(strip_tags($item->body), 50);
+      $item->synopsis = Str::limit(strip_tags($item->body), 150);
     });
   }
 

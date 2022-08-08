@@ -10,9 +10,6 @@
         </a>
       </div>
       <div class="card-body">
-        <div class="row">
-
-        </div>
         <div class="table-responsive">
           <table class="table table-bordered border-bottom w-100" id="Datatable">
             <thead>
@@ -191,8 +188,10 @@
       modalCreate.addEventListener('show.bs.modal', function (event) {
       });
       modalCreate.addEventListener('hidden.bs.modal', function (event) {
-        this.querySelector('input[name=kode_bank]').value = '';
-        this.querySelector('input[name=bank_name]').value = '';
+        this.querySelector('input[name=title]').value = '';
+        this.querySelector('textarea[name=description]').value = '';
+        this.querySelector('input[name=date_start]').value = '';
+        this.querySelector('input[name=date_end]').value = '';
       });
       modalEdit.addEventListener('show.bs.modal', function (event) {
         let title = event.relatedTarget.getAttribute('data-bs-title');

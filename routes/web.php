@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend as Backend;
-use App\Http\Controllers\Frontend as Frontend;
 use App\Http\Controllers\Default as DefaultBackend;
+use App\Http\Controllers\Frontend as Frontend;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,5 +72,11 @@ Route::prefix('backend')->name('backend.')->middleware(['auth:web'])->group(func
   Route::resource('settings', Backend\SettingController::class);
 });
 
-Route::get('berita/{slug}', [Frontend\NewsController::class, 'show'])->name('pages.show');
+Route::name('frontend.')->group(function () {
+  Route::get('/', [Frontend\HomeController::class, 'index'])->name('home');
+  Route::get('pages', [Frontend\PageController::class, 'index'])->name('pages.index');
+  Route::resource('berita', Frontend\NewsController::class)->only(['index', 'show']);
+  Route::resource('galleries', Frontend\GalleryController::class)->only(['index', 'show']);
+  Route::resource('videos', Frontend\VideoController::class)->only(['index', 'show']);
+});
 
