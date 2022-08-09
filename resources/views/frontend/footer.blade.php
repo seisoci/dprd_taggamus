@@ -11,13 +11,12 @@
       <ul>
         <li><a href="">Beranda</a></li>
         <li><a href="">Pages</a></li>
-        <li><a href="">Berita</a></li>
-        <li><a href="">Pengumuman</a></li>
+        <li><a href="{{ route('frontend.berita.index') }}">Berita</a></li>
         <li><a href="">Staff</a></li>
-        <li><a href="">Gallery</a></li>
-        <li><a href="">Polling</a></li>
+        <li><a href="{{ route('frontend.galleries.index') }}">Gallery</a></li>
+        <li><a href="{{ route('frontend.polling.index') }}">Polling</a></li>
         <li><a href="">Downloads</a></li>
-        <li><a href="">Contact</a></li>
+        <li><a href="{{ route('frontend.contact.index') }}">Contact</a></li>
       </ul>
     </div>
   </div>

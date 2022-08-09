@@ -18,6 +18,6 @@ class Polling extends Model
 
   public function options()
   {
-    return $this->hasMany(PollingOption::class);
+    return $this->hasMany(PollingOption::class)->orderBy('sort', 'asc');
   }
 }

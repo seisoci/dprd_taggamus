@@ -78,5 +78,10 @@ Route::name('frontend.')->group(function () {
   Route::resource('berita', Frontend\NewsController::class)->only(['index', 'show']);
   Route::resource('galleries', Frontend\GalleryController::class)->only(['index', 'show']);
   Route::resource('videos', Frontend\VideoController::class)->only(['index', 'show']);
+  Route::resource('contact', Frontend\ContactController::class)->only(['index', 'store']);
+  Route::resource('polling', Frontend\PollingController::class)->only(['index', 'store']);
+  Route::resource('jdih', Frontend\JDIHController::class)->only(['index', 'show']);
+  Route::get('/reload-captcha', [Frontend\ContactController::class, 'reloadCaptcha'])->name('contact.reload-captcha');
+
 });
 
