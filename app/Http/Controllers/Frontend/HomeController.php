@@ -14,6 +14,7 @@ class HomeController extends Controller
 {
   public function index(Request $request)
   {
+    visitor()->visit();
     $settings = Setting::all()->keyBy('name');
     $sliders = Slider::orderBy('sort', 'asc')->get();
     $galleries = Post::where([

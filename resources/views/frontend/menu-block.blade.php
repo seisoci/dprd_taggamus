@@ -21,7 +21,11 @@
     <li class="{{ (request()->segment(1) == 'polling') ? 'active' : '' }}">
       <a href="{{ route('frontend.polling.index') }}"><i class="far fa-chart-bar"></i> <span>Polling</span></a>
     </li>
-    <li><a href=""><i class="fas fa-download"></i> <span>Download</span></a></li>
+    <li class="{{ (request()->segment(1) == 'jdih') ? 'active' : '' }}">
+      <a href="{{ route('backend.jdih.index')  }}">
+        <i class="fas fa-download"></i> <span>JDIH</span>
+      </a>
+    </li>
     <li class="{{ (request()->segment(1) == 'contact') ? 'active' : '' }}">
       <a href="{{ route('frontend.contact.index') }}">
         <i class="fas fa-phone-alt"></i> <span>Contact</span>

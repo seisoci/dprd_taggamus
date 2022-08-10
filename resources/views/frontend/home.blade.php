@@ -157,7 +157,7 @@
         @endforeach
       </ul>
       <div class="btn-container" data-aos="fade-up" data-aos-duration="1500">
-        <a href="" class="btn btn-sm btn-doc">Lihat Dokumen Lainnya</a>
+        <a href="{{ route('frontend.jdih.index') }}" class="btn btn-sm btn-doc">Lihat Dokumen Lainnya</a>
       </div>
     </div>
   </section>

@@ -13,7 +13,7 @@ class ContactController extends Controller
 {
   public function index(Request $request)
   {
-
+    visitor()->visit();
     return view('frontend.contact');
   }
 

@@ -15,7 +15,7 @@
         <li><a href="">Staff</a></li>
         <li><a href="{{ route('frontend.galleries.index') }}">Gallery</a></li>
         <li><a href="{{ route('frontend.polling.index') }}">Polling</a></li>
-        <li><a href="">Downloads</a></li>
+        <li><a href="{{ route('frontend.jdih.index') }}">JDIH</a></li>
         <li><a href="{{ route('frontend.contact.index') }}">Contact</a></li>
       </ul>
     </div>

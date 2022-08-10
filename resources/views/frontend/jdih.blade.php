@@ -6,7 +6,7 @@
       <ul id="listJDIH" class="row">
         @foreach($data ?? array() as $item)
           <li class="col-sm-6" data-aos="fade-up" data-aos-duration="1500">
-            <a href="{{ route('backend.jdih.show', $item['slug']) }}" class="cage-download">
+            <a href="{{ route('frontend.jdih.show', $item['slug']) }}" class="cage-download">
               <div class="icon">
                 <i class="fas fa-download"></i>
               </div>

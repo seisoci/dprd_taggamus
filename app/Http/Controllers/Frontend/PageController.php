@@ -10,6 +10,7 @@ class PageController extends Controller
 {
   public function index(Request $request)
   {
+    visitor()->visit();
     $data = Post::selectRaw('
       `posts`.`slug`,
       `posts`.`title`,
