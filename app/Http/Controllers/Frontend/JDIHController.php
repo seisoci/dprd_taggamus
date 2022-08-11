@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Setting;
+use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\TwitterCard;
 use Illuminate\Http\Request;
 
 class JDIHController extends Controller
@@ -25,6 +28,14 @@ class JDIHController extends Controller
         'html' => $view
       ];
     }
+
+    $settings = Setting::all()->keyBy('name');
+
+    SEOTools::setTitle('JDIH')
+      ->addImages([asset("/storage/images/assets/" . $settings['logo_left_url']['value']), asset("/storage/images/assets/" . $settings['logo_right_url']['value'])]);
+
+    TwitterCard::setTitle('JDIH')
+      ->setImages(asset("/storage/images/assets/" . $settings['logo_right_url']['value']));
 
     return view('frontend.jdih', compact('data'));
   }

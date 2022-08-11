@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\DataStorage;
 use App\Models\Post;
+use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\TwitterCard;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -27,6 +29,19 @@ class GalleryController extends Controller
       ];
     }
 
+    $post = Post::where([
+      ['posts.type', 'galleries'],
+      ['posts.published', '1']
+    ])
+      ->orderBy('publish_at', 'desc')
+      ->limit(1)
+      ->first();
+
+    SEOTools::setTitle('Gallery');
+
+    TwitterCard::setTitle('Gallery')
+      ->setImages(asset("/storage/images/thumbnail/" . $post['image']));
+
     return view('frontend.galleries', compact('data'));
   }
 
@@ -46,7 +61,6 @@ class GalleryController extends Controller
       ->orderBy('sort', 'asc')
       ->simplePaginate(10);
 
-
     $anotherAlbum = Post::where([
       ['posts.type', 'galleries'],
       ['posts.published', '1']
@@ -62,6 +76,11 @@ class GalleryController extends Controller
         'html' => $view
       ];
     }
+
+    SEOTools::setTitle('Gallery - ' . $post['title']);
+
+    TwitterCard::setTitle('Gallery')
+      ->setImages(asset("/storage/images/thumbnail/" . $post['image']));
 
     return view('frontend.galleries-detail', compact('data', 'anotherAlbum', 'post'));
   }

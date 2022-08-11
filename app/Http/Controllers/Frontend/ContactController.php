@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\GuestBook;
-use App\Models\Movement;
-use App\Models\Post;
+use App\Models\Setting;
+use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\TwitterCard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,10 +15,18 @@ class ContactController extends Controller
   public function index(Request $request)
   {
     visitor()->visit();
+    $settings = Setting::all()->keyBy('name');
+
+    SEOTools::setTitle('Kontak Kami')
+      ->addImages([asset("/storage/images/assets/" . $settings['logo_left_url']['value']), asset("/storage/images/assets/" . $settings['logo_right_url']['value'])]);
+
+    TwitterCard::setTitle('Kontak Kami')
+      ->setImages(asset("/storage/images/assets/" . $settings['logo_right_url']['value']));
     return view('frontend.contact');
   }
 
-  public function store(Request $request){
+  public function store(Request $request)
+  {
     $validator = Validator::make($request->all(), [
       'name' => ['required', 'string', 'max:255'],
       'email' => 'required|email',
@@ -35,6 +44,6 @@ class ContactController extends Controller
 
   public function reloadCaptcha()
   {
-    return response()->json(['captcha'=> captcha_img()]);
+    return response()->json(['captcha' => captcha_img()]);
   }
 }

@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Bank;
 use App\Models\Polling;
 use App\Models\PollingAnswer;
+use App\Models\Setting;
 use App\Traits\ResponseStatus;
+use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\TwitterCard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,7 +21,13 @@ class PollingController extends Controller
   {
     visitor()->visit();
     $data = Polling::with('options')->where('status', '1')->orderBy('publish_at', 'desc')->limit(1)->first();
+    $settings = Setting::all()->keyBy('name');
 
+    SEOTools::setTitle('Polling')
+      ->addImages([asset("/storage/images/assets/" . $settings['logo_left_url']['value']), asset("/storage/images/assets/" . $settings['logo_right_url']['value'])]);
+
+    TwitterCard::setTitle('Polling')
+      ->setImages(asset("/storage/images/assets/" . $settings['logo_right_url']['value']));
     return view('frontend.polling', compact('data'));
   }
 

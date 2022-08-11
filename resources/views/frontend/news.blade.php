@@ -1,5 +1,5 @@
 @extends('frontend.template-section')
-@section('title_header', ' Berita')
+@section('title_header', 'Berita')
 @section('content')
   <section class="news-list">
     <div class="container">

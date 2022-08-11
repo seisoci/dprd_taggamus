@@ -12,4 +12,8 @@ class Komisi extends Model
   protected $fillable = [
     'name'
   ];
+
+  public function partai_members(){
+    return $this->hasMany(PartaiMember::class, 'komisi_id');
+  }
 }

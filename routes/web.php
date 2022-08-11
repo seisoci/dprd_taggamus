@@ -81,6 +81,7 @@ Route::name('frontend.')->group(function () {
   Route::resource('contact', Frontend\ContactController::class)->only(['index', 'store']);
   Route::resource('polling', Frontend\PollingController::class)->only(['index', 'store']);
   Route::resource('jdih', Frontend\JDIHController::class)->only(['index', 'show']);
+  Route::resource('staff', Frontend\StaffController::class)->only(['index', 'show']);
   Route::get('/reload-captcha', [Frontend\ContactController::class, 'reloadCaptcha'])->name('contact.reload-captcha');
 
 });
