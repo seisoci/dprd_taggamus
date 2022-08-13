@@ -37,6 +37,7 @@
               <th>Agama</th>
               <th>Partai</th>
               <th>Period</th>
+              <th>No Urut</th>
               <th>Aksi</th>
             </tr>
             </thead>
@@ -80,7 +81,7 @@
         scrollX: true,
         processing: true,
         serverSide: true,
-        order: [[3, 'desc']],
+        order: [[1, 'asc']],
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         pageLength: 10,
         ajax: {
@@ -111,6 +112,7 @@
           {data: 'religion',name: 'partai_members.religion'},
           {data: 'partai',name: 'partai_members.partai'},
           {data: 'period',name: 'partai_members.period'},
+          {data: 'sort',name: 'sort'},
           {data: 'action', name: 'action', className: 'text-center', orderable: false, searchable: false},
         ],
       });

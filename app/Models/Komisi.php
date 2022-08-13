@@ -10,7 +10,8 @@ class Komisi extends Model
   use HasFactory;
 
   protected $fillable = [
-    'name'
+    'name',
+    'sort'
   ];
 
   public function partai_members(){

@@ -18,6 +18,7 @@
             <thead>
             <tr>
               <th>Nama Komisi</th>
+              <th>Sort</th>
               <th>Aksi</th>
             </tr>
             </thead>
@@ -46,6 +47,10 @@
             <div class="form-group">
               <label>Nama Daerah Pemilihan <span class="text-danger">*</span></label>
               <input type="text" name="name" class="form-control"/>
+            </div>
+            <div class="form-group">
+              <label>No Urut <span class="text-danger">*</span></label>
+              <input type="text" name="sort" class="form-control"/>
             </div>
           </div>
           <div class="modal-footer">
@@ -76,6 +81,10 @@
             <div class="form-group">
               <label>Nama Daerah Pemilihan <span class="text-danger">*</span></label>
               <input type="text" name="name" class="form-control"/>
+            </div>
+            <div class="form-group">
+              <label>No Urut <span class="text-danger">*</span></label>
+              <input type="text" name="sort" class="form-control"/>
             </div>
           </div>
           <div class="modal-footer">
@@ -124,12 +133,13 @@
         scrollX: false,
         processing: true,
         serverSide: true,
-        order: [[0, 'asc']],
+        order: [[1, 'asc']],
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         pageLength: 10,
         ajax: "{{ route('backend.komisi.index') }}",
         columns: [
           {data: 'name', name: 'name'},
+          {data: 'sort', name: 'sort'},
           {data: 'action', name: 'action', orderable: false, searchable: false},
         ],
       });
@@ -138,14 +148,18 @@
       });
       modalCreate.addEventListener('hidden.bs.modal', function (event) {
         this.querySelector('input[name=name]').value = '';
+        this.querySelector('input[name=sort]').value = '';
       });
       modalEdit.addEventListener('show.bs.modal', function (event) {
         let name = event.relatedTarget.getAttribute('data-bs-name');
+        let sort = event.relatedTarget.getAttribute('data-bs-sort');
         this.querySelector('input[name=name]').value = name;
+        this.querySelector('input[name=sort]').value = sort;
         this.querySelector('#formUpdate').setAttribute('action', '{{ route("backend.komisi.index") }}/' + event.relatedTarget.getAttribute('data-bs-id'));
       });
       modalEdit.addEventListener('hidden.bs.modal', function (event) {
         this.querySelector('input[name=name]').value = '';
+        this.querySelector('input[name=sort]').value = '';
         this.querySelector('#formUpdate').setAttribute('href', '');
       });
       modalDelete.addEventListener('show.bs.modal', function (event) {

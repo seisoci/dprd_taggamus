@@ -37,7 +37,7 @@ class PartaiMemberController extends Controller
       $data = PartaiMember::selectRaw('
         `partai_members`.*,
         `election_regions`.`name` AS `election_region_name`,
-        `partai_members`.`name` AS `partai_member_name`
+        `komisis`.`name` AS `partai_member_name`
       ')
         ->leftJoin('komisis', 'komisis.id', '=', 'partai_members.komisi_id')
         ->leftJoin('election_regions', 'election_regions.id', '=', 'partai_members.election_region_id');

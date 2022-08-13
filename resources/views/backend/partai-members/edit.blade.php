@@ -84,6 +84,10 @@
                 <label>Priode</label>
                 <input type="text" name="period" class="form-control" value="{{ $data['period'] ?? '' }}">
               </div>
+              <div class="form-group">
+                <label>No Urut</label>
+                <input type="text" name="sort" class="form-control">
+              </div>
             </div>
           </div>
         </div>
@@ -185,6 +189,24 @@
         dateFormat: "Y-m-d H:i:s",
         time_24hr: true,
       });
+
+      $("#select2Komisi").select2({
+        placeholder: 'Pilih Komisi',
+        width: '100%',
+        ajax: {
+          url: "{{route('backend.komisi.select2')}}",
+          dataType: 'json',
+          delay: 100,
+          cache: true,
+          data: function (params) {
+            return {
+              q: params.term,
+              page: params.page || 1
+            };
+          }
+        },
+      });
+
 
     });
   </script>

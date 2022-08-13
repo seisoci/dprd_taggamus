@@ -20,6 +20,7 @@ class PartaiMember extends Model
     'partai',
     'period',
     'image',
+    'sort',
   ];
 
   public function komisi()

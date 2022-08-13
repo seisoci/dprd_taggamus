@@ -40,6 +40,7 @@ class KomisiController extends Controller
                             <li><a href="#" data-bs-toggle="modal" data-bs-target="#modalEdit"
                             data-bs-id="' . $row->id . '"
                             data-bs-name="' . $row->name . '"
+                            data-bs-sort="' . $row->sort . '"
                             class="dropdown-item">Ubah</a></li>
                             <li><a href="#" data-bs-toggle="modal" data-bs-target="#modalDelete" data-bs-id="' . $row->id . '" class="dropdown-item">Hapus</a></li>
                           </ul>

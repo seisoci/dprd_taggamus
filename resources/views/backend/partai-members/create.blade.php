@@ -57,7 +57,7 @@
               </div>
               <div class="form-group">
                 <label>Agama</label>
-                <select class="form-select" name="religion">
+                <select class=  "form-select" name="religion">
                   <option value="ISLAM">ISLAM</option>
                   <option value="KRISTEN">KRISTEN</option>
                   <option value="PROTESTAN">PROTESTAN</option>
@@ -74,6 +74,10 @@
               <div class="form-group">
                 <label>Priode</label>
                 <input type="text" name="period" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>No Urut</label>
+                <input type="text" name="sort" class="form-control">
               </div>
             </div>
           </div>
