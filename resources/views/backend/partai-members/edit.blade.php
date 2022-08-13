@@ -86,7 +86,7 @@
               </div>
               <div class="form-group">
                 <label>No Urut</label>
-                <input type="text" name="sort" class="form-control">
+                <input type="text" name="sort" class="form-control" value="{{ $data['sort'] ?? '' }}">
               </div>
             </div>
           </div>
