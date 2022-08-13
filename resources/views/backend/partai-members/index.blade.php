@@ -108,7 +108,7 @@
           {data: 'place_birth',name: 'partai_members.place_birth'},
           {data: 'no_member',name: 'partai_members.no_member'},
           {data: 'partai_member_name',name: 'partai_members.komisi_id'},
-          {data: 'election_region_name',name: 'election_regions.election_region_id'},
+          {data: 'election_region_name',name: 'election_regions.name'},
           {data: 'religion',name: 'partai_members.religion'},
           {data: 'partai',name: 'partai_members.partai'},
           {data: 'period',name: 'partai_members.period'},
