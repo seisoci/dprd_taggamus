@@ -39,8 +39,8 @@ class PartaiMemberController extends Controller
         `election_regions`.`name` AS `election_region_name`,
         `partai_members`.`name` AS `partai_member_name`
       ')
-        ->join('komisis', 'komisis.id', '=', 'partai_members.komisi_id')
-        ->join('election_regions', 'election_regions.id', '=', 'partai_members.election_region_id');
+        ->leftJoin('komisis', 'komisis.id', '=', 'partai_members.komisi_id')
+        ->leftJoin('election_regions', 'election_regions.id', '=', 'partai_members.election_region_id');
 
       return DataTables::of($data)
         ->addIndexColumn()

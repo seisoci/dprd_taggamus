@@ -84,7 +84,7 @@
           </div>
           <div class="form-group mt-2">
             <div class="col-md-6 captcha">
-              <span>{!! captcha_img() !!}</span>
+              <span>{!! captcha_img('flat') !!}</span>
               <button type="button" class="btn btn-danger reload" id="reload">
                 &#x21bb;
               </button>

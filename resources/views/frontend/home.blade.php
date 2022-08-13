@@ -103,7 +103,7 @@
           <div class="col-sm-6 d-flex align-items-center order-1 order-sm-2">
             <a href="" class="image-cage">
               <img
-                src="{{ $data['news'][0]['image'] ? asset("/storage/images/thumbnail/".$data['news'][0]['image']) : '' }}"
+                src="{{ isset($data['news'][0]) ? asset("/storage/images/thumbnail/".$data['news'][0]['image']) : '' }}"
                 class="img-fluid" alt="">
             </a>
           </div>

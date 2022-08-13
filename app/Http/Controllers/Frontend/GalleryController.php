@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\DataStorage;
 use App\Models\Post;
+use App\Models\Setting;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Artesaos\SEOTools\Facades\TwitterCard;
 use Illuminate\Http\Request;
@@ -39,8 +40,9 @@ class GalleryController extends Controller
 
     SEOTools::setTitle('Gallery');
 
+    $settings = Setting::all()->keyBy('name');
     TwitterCard::setTitle('Gallery')
-      ->setImages(asset("/storage/images/thumbnail/" . $post['image']));
+      ->setImages(asset("/storage/images/thumbnail/" . ($post['image'] ?? $settings['logo_left_url']['value'])));
 
     return view('frontend.galleries', compact('data'));
   }
@@ -77,10 +79,11 @@ class GalleryController extends Controller
       ];
     }
 
+    $settings = Setting::all()->keyBy('name');
     SEOTools::setTitle('Gallery - ' . $post['title']);
 
     TwitterCard::setTitle('Gallery')
-      ->setImages(asset("/storage/images/thumbnail/" . $post['image']));
+      ->setImages(asset("/storage/images/thumbnail/" . ($post['image'] ?? $settings['logo_left_url']['value'])));
 
     return view('frontend.galleries-detail', compact('data', 'anotherAlbum', 'post'));
   }
