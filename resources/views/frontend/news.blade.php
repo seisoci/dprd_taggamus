@@ -12,7 +12,7 @@
                   <div
                     class="head">{{ isset($item['publish_at']) ? \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['publish_at'])->isoFormat('DD MMMM YYYY') : '' }}
                     | {{ $item['categories'] ?? '' }}</div>
-                  <a href="">
+                  <a href="{{ route('frontend.berita.show', $item['slug']) }}">
                     <h1 class="title">{{ $item['title'] ?? '' }}</h1>
                     <p>{{ $item['synopsis'] ?? '' }}</p>
                   </a>

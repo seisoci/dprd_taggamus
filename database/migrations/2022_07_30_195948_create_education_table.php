@@ -18,8 +18,8 @@ return new class extends Migration {
       $table->string('name_institution');
       $table->string('major')->nullable();
       $table->string('faculty')->nullable();
-      $table->year('entry_year')->nullable();
-      $table->year('graduation_year')->nullable();
+      $table->string('entry_year', 50)->nullable();
+      $table->string('graduation_year', 50)->nullable();
       $table->timestamps();
     });
   }

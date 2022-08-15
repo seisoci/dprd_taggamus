@@ -17,8 +17,8 @@ return new class extends Migration {
       $table->foreignId('partai_member_id')->constrained()->on('partai_members')->onUpdate('cascade')->onDelete('cascade');
       $table->string('name');
       $table->string('position')->nullable();
-      $table->year('entry_year')->nullable();
-      $table->year('graduation_year')->nullable();
+      $table->string('entry_year', 50)->nullable();
+      $table->string('graduation_year', 50)->nullable();
       $table->timestamps();
     });
   }

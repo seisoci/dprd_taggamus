@@ -22,8 +22,8 @@ class NewsController extends Controller
         ['posts.type', 'posts'],
         ['posts.published', '1']
       ])
-      ->join('post_post_category', 'post_post_category.post_id', '=', 'posts.id')
-      ->join('post_categories', 'post_categories.id', '=', 'post_post_category.post_category_id')
+      ->leftJoin('post_post_category', 'post_post_category.post_id', '=', 'posts.id')
+      ->leftJoin('post_categories', 'post_categories.id', '=', 'post_post_category.post_category_id')
       ->orderBy('posts.publish_at', 'desc')
       ->groupBy('posts.id')
       ->paginate(10);
@@ -46,11 +46,34 @@ class NewsController extends Controller
     return view('frontend.news', compact('data'));
   }
 
-  public function show($slug, \Request $request)
+  public function show($slug)
   {
-    $data = Post::where('slug', $slug)->first();
+    $data = Post::selectRaw('
+      `posts`.*,
+      GROUP_CONCAT(`post_categories`.`name` SEPARATOR ",") as `categories`
+      ')
+      ->with('datastorage')
+      ->where([
+        ['posts.type', 'posts'],
+        ['posts.published', '1'],
+        ['posts.slug', $slug]
+      ])
+      ->leftJoin('post_post_category', 'post_post_category.post_id', '=', 'posts.id')
+      ->leftJoin('post_categories', 'post_categories.id', '=', 'post_post_category.post_category_id')
+      ->orderBy('posts.publish_at', 'desc')
+      ->groupBy('posts.id')
+      ->firstOrFail();
+
     visitor()->visit($data);
-//    visitor()->visit();
-//    dd($slug);
+
+    SEOTools::setTitle($data['title'])
+      ->setDescription($data['synopsis'])
+      ->addImages([asset("/storage/images/assets/" . $data['image'])]);
+
+    TwitterCard::setTitle($data['title'])
+      ->setDescription($data['synopsis'])
+      ->setImages(asset("/storage/images/assets/" . $data['image']));
+
+    return view('frontend.news-detail', compact('data'));
   }
 }

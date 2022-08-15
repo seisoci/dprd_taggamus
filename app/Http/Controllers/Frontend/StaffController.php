@@ -33,4 +33,9 @@ class StaffController extends Controller
 
     return view('frontend.staff', compact('data'));
   }
+
+  public function show($id){
+    $data = PartaiMember::with(['komisi', 'election_region', 'education', 'organization', 'movement', 'profession', 'awards'])->find($id);
+    return view('frontend.staff-detail', compact('data'));
+  }
 }

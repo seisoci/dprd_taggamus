@@ -39,4 +39,28 @@ class JDIHController extends Controller
 
     return view('frontend.jdih', compact('data'));
   }
+
+  public function show($slug)
+  {
+    $data = Post::with('datastorage')
+      ->where([
+        ['posts.type', 'jdih'],
+        ['posts.published', '1'],
+        ['posts.slug', $slug]
+      ])
+      ->firstOrFail();
+
+    visitor()->visit();
+
+    SEOTools::setTitle($data['title'])
+      ->setDescription($data['synopsis'])
+      ->addImages([asset("/storage/images/assets/" . $data['image'])]);
+
+    TwitterCard::setTitle($data['title'])
+      ->setDescription($data['synopsis'])
+      ->setImages(asset("/storage/images/assets/" . $data['image']));
+
+    return view('frontend.jdih-detail', compact('data'));
+  }
+
 }

@@ -84,7 +84,7 @@ class PartaiMemberController extends Controller
     if ($validator->passes()) {
       DB::beginTransaction();
       try {
-        $dimensions = [['720', '1280 ', 'thumbnail']];
+        $dimensions = [['500', '500 ', 'thumbnail']];
         $image = isset($request['image']) && !empty($request['image']) ? FileUpload::uploadImage('image', $dimensions) : NULL;
         $dataRequest = $request->all();
         $dataRequest['image'] = $image;
@@ -125,7 +125,7 @@ class PartaiMemberController extends Controller
     ]);
 
     if ($validator->passes()) {
-      $dimensions = [['1280', '720', 'thumbnail']];
+      $dimensions = [['500', '500', 'thumbnail']];
       DB::beginTransaction();
       try {
         $data = PartaiMember::find($id);
@@ -158,9 +158,7 @@ class PartaiMemberController extends Controller
       ['url' => route('backend.partai-member.index'), 'title' => "Anggota Partai"],
       ['url' => '#', 'title' => "Detail Anggota Partai"],
     ];
-
     return view('backend.partai-members.show', compact('page_breadcrumbs', 'config', 'id'));
-
   }
 
   public function destroy($id)

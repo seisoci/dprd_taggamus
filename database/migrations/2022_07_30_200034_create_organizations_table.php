@@ -16,7 +16,7 @@ return new class extends Migration {
       $table->id();
       $table->foreignId('partai_member_id')->constrained()->on('partai_members')->onUpdate('cascade')->onDelete('cascade');
       $table->string('name');
-      $table->year('year')->nullable();
+      $table->string('year', 50)->nullable();
       $table->timestamps();
     });
   }

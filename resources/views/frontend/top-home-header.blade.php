@@ -1,12 +1,12 @@
 <header>
   <div class="top-header">
-    <div class="logo">
+    <a href="{{ '/' }}" class="logo">
       <img src="{{ asset("/storage/images/assets/".Menu::settings()['logo_left_url']['value']) }}" alt="">
       <img src="{{ asset("/storage/images/assets/".Menu::settings()['logo_right_url']['value']) }}" alt="">
       <div class="text"><h1>Dewan Perwakilan</h1>
         <h1>Rakyat Daerah</h1>
         <h2>Kabupaten Tanggamus</h2></div>
-    </div>
+    </a>
     <div class="trigger-header">
       <form action="" class="form-search">
         <input type="text" placeholder="Cari disini ...">

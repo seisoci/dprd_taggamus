@@ -98,9 +98,9 @@
             className: 'text-center',
             render: function (data, type, full, meta) {
               if (data) {
-                return `<img src="/storage/images/thumbnail/${data}" style="min-width:100px; min-height: 150px;">`
+                return `<img src="/storage/images/thumbnail/${data}" style="min-width:100px; min-height: 100px;">`
               }
-              return `<img src="/assets/img/svgs/no-content.svg" style="min-width:100px; min-height: 150px;">`
+              return `<img src="/assets/img/svgs/no-content.svg" style="min-width:100px; min-height: 100px;">`
             },
           },
           {data: 'name', name: 'partai_members.name'},

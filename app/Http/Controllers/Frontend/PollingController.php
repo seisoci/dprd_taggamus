@@ -20,7 +20,7 @@ class PollingController extends Controller
   public function index(Request $request)
   {
     visitor()->visit();
-    $data = Polling::with('options')->where('status', '1')->orderBy('publish_at', 'desc')->limit(1)->first();
+    $data = Polling::with('options')->where('status', '1')->orderBy('publish_at', 'desc')->get();
     $settings = Setting::all()->keyBy('name');
 
     SEOTools::setTitle('Polling')
@@ -41,7 +41,6 @@ class PollingController extends Controller
     if ($validator->passes()) {
       $polling = PollingAnswer::where([
         ['polling_id', $request['polling_id']],
-        ['polling_option_id', $request['polling_option_id']],
         ['ip_address', $request->ip()]
       ])->first();
 

@@ -21,7 +21,7 @@
                     src="{{ $data['image'] != NULL ? asset("/storage/images/original/".$data['image']) : asset('assets/img/svgs/no-content.svg') }}"
                      style="object-fit: cover; border: 1px solid #d9d9d9" class="mb-2 border-2 mx-auto"
                      height="300px"
-                     width="220px" alt="">
+                     width="300px" alt="">
                 <input type="file" class="image d-block" name="image" accept=".jpg, .jpeg, .png">
                 <p class="text-muted ms-75 mt-50"><small>Allowed JPG, JPEG or PNG. Max
                     size of

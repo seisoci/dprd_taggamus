@@ -10,7 +10,7 @@
     <div class="container">
       <ul>
         <li><a href="/">Beranda</a></li>
-        <li><a href="">Pages</a></li>
+        <li><a href="{{ route('frontend.pages.index') }}">Pages</a></li>
         <li><a href="{{ route('frontend.berita.index') }}">Berita</a></li>
         <li><a href="{{ route('frontend.staff.index') }}">Anggota</a></li>
         <li><a href="{{ route('frontend.galleries.index') }}">Gallery</a></li>

@@ -3,29 +3,31 @@
 @section('content')
   <section class="polling">
     <div class="container">
-      <div class="row g-0">
-        <div class="col-md-7 col-lg-8">
-          <div class="content" data-aos="fade-up" data-aos-duration="1500">
-            <h1 class="title">{{ $data['title'] ?? '' }}</h1>
-            <p>{{ $data['description'] ?? '' }}</p>
+      @foreach($data ?? array() as $item)
+        <div class="row mb-4 g-0">
+          <div class="col-md-7 col-lg-8">
+            <div class="content" data-aos="fade-up" data-aos-duration="1500">
+              <h1 class="title">{{ $item['title'] ?? '' }}</h1>
+              <p>{{ $item['description'] ?? '' }}</p>
+            </div>
+          </div>
+          <div class="col-md-5 col-lg-4">
+            <div class="cage-polling" data-aos="fade-left" data-aos-duration="1500">
+              <form class="formStore" action="{{ route('frontend.polling.store') }}">
+                @csrf
+                <input type="hidden" name="polling_id" value="{{ $item['id'] }}">
+                @foreach($item['options'] ?? array() as $itemOption)
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio{{ $itemOption['id'] }}" name="polling_option_id" class="custom-control-input" value="{{ $itemOption['id'] }}">
+                    <label class="custom-control-label" for="customRadio{{ $itemOption['id'] }}">{{ $itemOption['name'] }}</label>
+                  </div>
+                @endforeach
+                <button type="submit" class="btn btn-sm btn-custom">Kirim</button>
+              </form>
+            </div>
           </div>
         </div>
-        <div class="col-md-5 col-lg-4">
-          <div class="cage-polling" data-aos="fade-left" data-aos-duration="1500">
-            <form id="formStore" action="{{ route('frontend.polling.store') }}">
-              @csrf
-              <input type="hidden" name="polling_id" value="{{ $data['id'] }}">
-              @foreach($data['options'] ?? array() as $item)
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadio{{ $item['id'] }}" name="polling_option_id" class="custom-control-input" value="{{ $item['id'] }}">
-                  <label class="custom-control-label" for="customRadio{{ $item['id'] }}">{{ $item['name'] }}</label>
-                </div>
-              @endforeach
-              <button type="submit" class="btn btn-sm btn-custom">Kirim</button>
-            </form>
-          </div>
-        </div>
-      </div>
+      @endforeach
     </div>
   </section>
 @endsection
@@ -38,7 +40,7 @@
   <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js') }}"></script>
   <script>
     $(document).ready(function () {
-      $("#formStore").submit(function (e) {
+      $(".formStore").submit(function (e) {
         e.preventDefault();
         let form = $(this);
         let btnSubmit = form.find("[type='submit']");

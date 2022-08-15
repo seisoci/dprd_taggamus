@@ -43,6 +43,11 @@ class PartaiMember extends Model
     return $this->hasMany(Organization::class);
   }
 
+  public function awards()
+  {
+    return $this->hasMany(Award::class);
+  }
+
   public function movement()
   {
     return $this->hasMany(Movement::class);

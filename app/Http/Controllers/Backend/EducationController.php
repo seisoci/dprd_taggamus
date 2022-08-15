@@ -76,7 +76,7 @@ class EducationController extends Controller
       $request->request->add(['partai_member_id' => $partaiMember['id']]);
       Education::create($request->all());
 
-      $response = $this->responseStore(true, route('backend.partai-member.show', $partaiMember['id']));
+      $response = $this->responseStore(true, route('backend.partai-member.educations.index', $partaiMember['id']));
     } else {
       $response = response()->json(['error' => $validator->errors()->all()]);
     }

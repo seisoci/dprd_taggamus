@@ -104,6 +104,7 @@ class NewsController extends Controller
       DB::beginTransaction();
       try {
         $dimensions = [['1280', '1280', 'thumbnail']];
+        $dimensionsImage = [['1280', '720', 'thumbnail']];
         $image = isset($request['image']) && !empty($request['image']) ? FileUpload::uploadImage('image', $dimensions) : NULL;
         $data = $request->all();
         $data['image'] = $image;
@@ -113,7 +114,7 @@ class NewsController extends Controller
         $post->post_categories()->attach($postCategories);
 
         foreach ($request['post_items'] ?? array() as $key => $item):
-          $image = isset($item) && !empty($item) ? FileUpload::uploadImage("post_items.$key", $dimensions) : NULL;
+          $image = isset($item) && !empty($item) ? FileUpload::uploadImage("post_items.$key", $dimensionsImage) : NULL;
           $post->datastorage()->create([
             'sort' => ++$key,
             'type' => 'image',
@@ -153,12 +154,14 @@ class NewsController extends Controller
       'title' => 'required|string',
       'post_categories' => 'nullable|array',
       'post_categories.*' => 'nullable|integer',
-      'image' => 'image|mimes:jpg,png,jpeg|max:2048',
+      'image' => 'image|mimes:jpg,png,jpeg|max:5000',
+      'post_items.*' => 'image|mimes:jpg,png,jpeg|max:5000',
       'status' => 'in:0,1',
     ]);
 
     if ($validator->passes()) {
       $dimensions = [['1280', '1280', 'thumbnail']];
+      $dimensionsImage = [['1280', '720', 'thumbnail']];
       DB::beginTransaction();
       try {
         $post = Post::with('post_categories')->find($id);
@@ -174,7 +177,7 @@ class NewsController extends Controller
         $post->post_categories()->sync($postCategories);
 
         foreach ($request['post_items'] ?? array() as $key => $item):
-          $image = isset($item) && !empty($item) ? FileUpload::uploadImage("post_items.$key", $dimensions) : NULL;
+          $image = isset($item) && !empty($item) ? FileUpload::uploadImage("post_items.$key", $dimensionsImage) : NULL;
           $max = $post->datastorage()->max('sort');
           $post->datastorage()->create([
             'sort' => ++$max,

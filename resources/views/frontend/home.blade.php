@@ -21,14 +21,6 @@
         @endforeach
       </div>
       <div class="swiper-controls">
-        {{--        <div class="share-button-slide d-flex">--}}
-        {{--          <i class="fas fa-share-alt"></i>--}}
-        {{--          <ul>--}}
-        {{--            <li><a href=""><i class="fab fa-facebook"></i></a></li>--}}
-        {{--            <li><a href="facebook_url"><i class="fab fa-twitter"></i></a></li>--}}
-        {{--            <li><a href=""><i class="fab fa-whatsapp"></i></a></li>--}}
-        {{--          </ul>--}}
-        {{--        </div>--}}
         <div class="swiper-pagination"></div>
         <div class="swiper-scrollbar"></div>
         <div class="swiper-navigation">
@@ -64,10 +56,10 @@
           <div class="ticker_slide">
             <div class="swiper-wrapper">
               @foreach($data['schedules'] ?? array() as $item)
-                <a href="#" class="swiper-slide item">
-                  <p><span class="badge text-bg-secondary">Terbaru</span><span class="time">{{ isset($data['news'][0]['publish_at']) ? \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $data['news'][0]['publish_at'])->isoFormat('DD MMMM YYYY HH:mm') : '' }} WIB</span>{{ $item['title'] ?? '' }}
-                  </p>
-                </a>
+                <div class="swiper-slide item" data-bs-toggle="modal" data-bs-target="#agendaModal" data-date="{{ isset($item['date_start']) ? \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['date_start'])->isoFormat('DD MMMM YYYY') : '' }}" data-time="{{ isset($item['date_start']) ? \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['date_start'])->isoFormat('HH:mm') : '' }}" data-content="{{ $item['description'] ?? '' }}">
+                  <p><span class="badge bg-secondary">Terbaru</span>
+                    <span class="time">{{ isset($item['date_start']) ? \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['date_start'])->isoFormat('DD MMMM YYYY HH:mm') : '' }} WIB</span>{{ $item['title'] ?? '' }}</p>
+                </div>
               @endforeach
             </div>
             <div class="container-nav">
@@ -103,7 +95,7 @@
           <div class="col-sm-6 d-flex align-items-center order-1 order-sm-2">
             <a href="" class="image-cage">
               <img
-                src="{{ isset($data['news'][0]) ? asset("/storage/images/thumbnail/".$data['news'][0]['image']) : '' }}"
+                src="{{ isset($data['news'][0]['image']) ? asset("/storage/images/thumbnail/".$data['news'][0]['image']) : asset('assets/plugins/dist/images/header/bg-3.jpg') }}"
                 class="img-fluid" alt="">
             </a>
           </div>
@@ -115,7 +107,7 @@
         @foreach($data['news'] ?? array() as $item)
           @if(!$loop->first)
             <div class="swiper-slide"
-                 style="background-image: url('{{ asset("/storage/images/thumbnail/".$item['image']) }}');">
+                 style="background-image: url('{{ isset($item['image']) ? asset("/storage/images/thumbnail/".$item['image']) : asset('assets/plugins/dist/images/header/bg-3.jpg') }}');">
               <div class="description">
                 <div
                   class="head">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['publish_at'])->isoFormat('DD MMMM YYYY') }}
@@ -180,6 +172,19 @@
     </div>
   </section>
   @include('frontend.footer')
+  <div class="modal fade" id="agendaModal" tabindex="-1" aria-labelledby="agendaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="border: none;">
+          <h5 class="modal-title" id="agendaModalLabel" style="background: #c0a03f;color: #fff;padding: 0 10px;border-radius: 3px;">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h2 id="agendaModalContent" style="font-size: 18px;">...</h2>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 
 @section('script')
@@ -256,6 +261,14 @@
       itemSelector: '.gallery-item'
     });
   }, 1000);
+
+  $('.ticker_slide > .swiper-wrapper > .item').click(function(){
+    var date = $(this).data().date;
+    var time = $(this).data().time;
+    var content = $(this).data().content;
+    $('#agendaModalLabel').html(date+' - '+time);
+    $('#agendaModalContent').html(content);
+  });
 </script>
 </body>
 

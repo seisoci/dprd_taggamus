@@ -33,8 +33,8 @@ class HomeController extends Controller
         ['posts.type', 'posts'],
         ['posts.published', '1']
       ])
-      ->join('post_post_category', 'post_post_category.post_id', '=', 'posts.id')
-      ->join('post_categories', 'post_categories.id', '=', 'post_post_category.post_category_id')
+      ->leftJoin('post_post_category', 'post_post_category.post_id', '=', 'posts.id')
+      ->leftJoin('post_categories', 'post_categories.id', '=', 'post_post_category.post_category_id')
       ->orderBy('posts.publish_at', 'desc')
       ->groupBy('posts.id')
       ->limit(11)

@@ -7,7 +7,7 @@
         <h1 class="head-title" data-aos="fade-up" data-aos-duration="1500">{{ $post['title'] ?? '' }}</h1>
         <div id="detailGallery" class="row gallery-container gallery-container-list">
           @foreach($data ?? array() as $item)
-            <a href="{{ $item['name'] ? asset("/storage/images/thumbnail/".$item['name']) : '' }}"
+            <a href="{{ $item['name'] ? asset("/storage/images/thumbnail/".$item['name']) : asset('assets/plugins/dist/images/header/bg-3.jpg') }}"
                class="col-sm-6 mb-4 gallery-item" data-aos="fade-up" data-aos-duration="1500">
               <div class="cage-image">
                 <img src="{{ $item['name'] ? asset("/storage/images/thumbnail/".$item['name']) : '' }}"

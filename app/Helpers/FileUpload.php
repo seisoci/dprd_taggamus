@@ -31,9 +31,10 @@ class FileUpload
         Image::make($file)->save($image_path . '/original/' . $fileName);
         foreach ($dimensions as $row) {
 //          $canvas = Image::canvas($row[0], $row[1]);
-          $resizeImage = Image::make($file)->resize($row[0], $row[1], function ($constraint) {
-            $constraint->aspectRatio();
-          });
+//          $resizeImage = Image::make($file)->resize($row[0], $row[1], function ($constraint) {
+//            $constraint->aspectRatio();
+//          });
+          $resizeImage = Image::make($file)->fit($row[0], $row[1]);
           if (!File::isDirectory($image_path . '/' . $row[2])) {
             File::makeDirectory($image_path . '/' . $row[2], 0777, true);
           }
