@@ -74,6 +74,7 @@ Route::prefix('backend')->name('backend.')->middleware(['auth:web'])->group(func
 
 Route::name('frontend.')->group(function () {
   Route::get('/', [Frontend\HomeController::class, 'index'])->name('home');
+  Route::get('/search', [Frontend\HomeController::class, 'q'])->name('search');
   Route::resource('pages', Frontend\PageController::class)->only(['index', 'show']);
   Route::resource('berita', Frontend\NewsController::class)->only(['index', 'show']);
   Route::resource('galleries', Frontend\GalleryController::class)->only(['index', 'show']);

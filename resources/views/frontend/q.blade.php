@@ -1,43 +1,96 @@
 @extends('frontend.template-section')
 @section('title_header', 'Pencarian')
 @section('content')
-  <section class="news-list">
+{{--  <section class="news-list">--}}
+{{--    <div class="container">--}}
+{{--      <ul id="listNews">--}}
+{{--        @foreach($data ?? array() as $item)--}}
+{{--          <li>--}}
+{{--            <div class="row no-gutters">--}}
+{{--              <div class="col-sm-6 order-2 order-sm-1" data-aos="fade-right" data-aos-duration="1500">--}}
+{{--                <div class="description">--}}
+{{--                  <div--}}
+{{--                    class="head">{{ isset($item['publish_at']) ? \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['publish_at'])->isoFormat('DD MMMM YYYY') : '' }}--}}
+{{--                    | {{ $item['categories'] ?? '' }}</div>--}}
+{{--                  <a href="">--}}
+{{--                    <h1 class="title">{{ $item['title'] ?? '' }}</h1>--}}
+{{--                    <p>{{ $item['synopsis'] ?? '' }}</p>--}}
+{{--                  </a>--}}
+{{--                  <div class="cage-link">--}}
+{{--                    <a href="{{ route('frontend.berita.show', $item['slug']) }}" class="btn btn-sm btn-link">Read--}}
+{{--                      More</a>--}}
+{{--                  </div>--}}
+{{--                </div>--}}
+{{--              </div>--}}
+{{--              <div class="col-sm-6 order-1 order-sm-2 nli" data-aos="fade-left" data-aos-duration="1500">--}}
+{{--                <a href="{{ route('frontend.berita.show', $item['slug']) }}" class="image-cage">--}}
+{{--                  <img src="{{ $item['image'] ? asset("/storage/images/thumbnail/".$item['image']) : '' }}" alt="">--}}
+{{--                </a>--}}
+{{--              </div>--}}
+{{--            </div>--}}
+{{--          </li>--}}
+{{--          <li>--}}
+
+{{--          </li>--}}
+{{--        @endforeach--}}
+{{--      </ul>--}}
+{{--      @if($data->hasMorePages())--}}
+{{--        <div class="btn-container" data-aos="fade-up" data-aos-duration="1500">--}}
+{{--          <a href="#" id="loadMore" data-page="1" class="btn btn-sm btn-loadmore">Load More</a>--}}
+{{--        </div>--}}
+{{--      @endif--}}
+{{--    </div>--}}
+{{--  </section>--}}
+
+  <section class="search-list">
     <div class="container">
-      <ul id="listNews">
+      <ul>
         @foreach($data ?? array() as $item)
-          <li>
-            <div class="row no-gutters">
-              <div class="col-sm-6 order-2 order-sm-1" data-aos="fade-right" data-aos-duration="1500">
-                <div class="description">
-                  <div
-                    class="head">{{ isset($item['publish_at']) ? \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['publish_at'])->isoFormat('DD MMMM YYYY') : '' }}
-                    | {{ $item['categories'] ?? '' }}</div>
-                  <a href="">
-                    <h1 class="title">{{ $item['title'] ?? '' }}</h1>
-                    <p>{{ $item['synopsis'] ?? '' }}</p>
-                  </a>
-                  <div class="cage-link">
-                    <a href="{{ route('frontend.berita.show', $item['slug']) }}" class="btn btn-sm btn-link">Read
-                      More</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 order-1 order-sm-2 nli" data-aos="fade-left" data-aos-duration="1500">
-                <a href="{{ route('frontend.berita.show', $item['slug']) }}" class="image-cage">
-                  <img src="{{ $item['image'] ? asset("/storage/images/thumbnail/".$item['image']) : '' }}" alt="">
-                </a>
-              </div>
+        <li class="mb-5">
+          <div class="row">
+            <div class="col-sm-5 col-lg-3">
+              <img src="{{ isset($item['image']) ? asset("/storage/images/thumbnail/".$item['image']) : asset('assets/plugins/dist/images/header/bg-3.jpg') }}" class="img-fluid mb-3" alt="">
             </div>
-          </li>
+            <div class="col-sm-7 col-lg-9">
+              <div class="info"><i class="far fa-calendar"></i> {{ isset($item['publish_at']) ? \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['publish_at'])->isoFormat('DD MMMM YYYY') : '' }}
+                | {{ $item['categories'] ?? 'No Categories' }}</div>
+              <a href="/{{ strtolower($item['type']) }}/{{ $item['slug'] }}"><h1 class="title">{{ $item['title'] ?? '' }}</h1></a>
+              <p>{{ $item['synopsis'] ?? 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid architecto distinctio dolor dolorem doloribus et impedit iste laboriosam minus neque nobis obcaecati omnis perspiciatis quam quisquam repellat, voluptas voluptate.' }}</p>
+              <a href="/{{ strtolower($item['type']) }}/{{ $item['slug'] }}" class="btn btn-sm btn-link">Read Details</a>
+            </div>
+          </div>
+        </li>
         @endforeach
       </ul>
-      @if($data->hasMorePages())
-        <div class="btn-container" data-aos="fade-up" data-aos-duration="1500">
-          <a href="#" id="loadMore" data-page="1" class="btn btn-sm btn-loadmore">Load More</a>
-        </div>
-      @endif
     </div>
   </section>
+
+<style>
+  section.search-list{
+    padding: 60px 0;
+  }
+  section.search-list ul{
+    list-style: none;
+    padding: 0;
+  }
+  section.search-list ul li{
+    margin-bottom: 30px;
+  }
+  section.search-list ul li .info{
+    font-size: 13px;
+    margin-bottom: 15px;
+  }
+  section.search-list ul li .title{
+    font-size: 18px;
+    font-weight: bold
+  }
+  section.search-list ul li .btn-link{
+    font-size: 10px;
+    color: #fff;
+    background: #c0a03f;
+    text-decoration: none;
+  }
+</style>
 @endsection
 @section('front-css')
   <link rel="stylesheet" href="{{ asset('assets/plugins/aos/dist/aos.css') }}">

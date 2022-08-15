@@ -8,8 +8,8 @@
         <h2>Kabupaten Tanggamus</h2></div>
     </a>
     <div class="trigger-header">
-      <form action="" class="form-search">
-        <input type="text" placeholder="Cari disini ...">
+      <form method="GET" action="{{ route('frontend.search') }}" class="form-search">
+        <input name="q" type="text" placeholder="Cari disini ...">
         <button type="submit"><i class="fas fa-search"></i></button>
       </form>
       <div class="cage-nav">

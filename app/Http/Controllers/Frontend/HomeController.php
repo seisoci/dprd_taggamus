@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-
   public function index(Request $request)
   {
     visitor()->visit();
@@ -78,15 +77,18 @@ class HomeController extends Controller
     $data = Post::selectRaw('
       IF(`posts`.`type` = "posts", "berita", `posts`.`type`) AS `type`,
       `posts`.`slug`,
+      `posts`.`image`,
       `posts`.`title`,
       `posts`.`publish_at`
       ')
       ->where([
+        ['posts.published', '1'],
+        ['posts.title', 'like', '%' . $request->q . '%'],
         ['posts.published', '1']
       ])
       ->orderBy('posts.publish_at', 'desc')
       ->groupBy('posts.id')
-      ->simplePaginate(10);
+      ->get();
 
     if ($request->ajax()) {
       $view = view('components.frontend.q-list', compact('data'))->render();
