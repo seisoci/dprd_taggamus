@@ -4,7 +4,11 @@
 <body>
 <main>
   @include('frontend.top-home-header')
-  @include('frontend.top-page-header')
+
+  @if(!isset($topHeader))
+    @include('frontend.top-page-header')
+  @endif
+
   @include('frontend.menu-block')
 
   @yield('content')

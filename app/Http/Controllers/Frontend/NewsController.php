@@ -74,6 +74,8 @@ class NewsController extends Controller
       ->setDescription($data['synopsis'])
       ->setImages(asset("/storage/images/thumbnail/".$data['image']));
 
-    return view('frontend.news-detail', compact('data'));
+    $topHeader = false;
+
+    return view('frontend.news-detail', compact('data', 'topHeader'));
   }
 }
