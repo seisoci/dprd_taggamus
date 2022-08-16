@@ -68,11 +68,11 @@ class NewsController extends Controller
 
     SEOTools::setTitle($data['title'])
       ->setDescription($data['synopsis'])
-      ->addImages([asset("/storage/images/thumbnail/".$data['name'])]);
+      ->addImages([asset("/storage/images/thumbnail/".$data['image'])]);
 
     TwitterCard::setTitle($data['title'])
       ->setDescription($data['synopsis'])
-      ->setImages(asset("/storage/images/thumbnail/".$data['name']));
+      ->setImages(asset("/storage/images/thumbnail/".$data['image']));
 
     return view('frontend.news-detail', compact('data'));
   }
