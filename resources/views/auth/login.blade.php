@@ -92,10 +92,6 @@
                   </label>
                 </div>
               </div>
-              <div class="text-end pt-4">
-                <p class="mb-0"><a href="forgot-password.html" class="text-secondary ms-1">Lupa
-                    Password?</a></p>
-              </div>
               <button type="submit" class="login100-form-btn btn btn-secondary">
                 Login
               </button>
