@@ -22,7 +22,7 @@ class HomeController extends Controller
     $galleries = Post::where([
       ['type', 'galleries'],
       ['published', '1']
-    ])->latest()->get();
+    ])->latest()->limit(6)->get();
 
     $news = Post::selectRaw('
       `posts`.*,
