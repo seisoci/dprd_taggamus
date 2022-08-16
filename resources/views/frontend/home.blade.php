@@ -143,7 +143,7 @@
             <div class="info">
               <div
                 class="date">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['publish_at'])->isoFormat('DD MMMM YYYY') }}</div>
-              <a href=""><h1 class="title">{{ $item['title'] ?? '' }}</h1></a>
+              <a href="{{ route('backend.jdih.show', $item['slug']) }}"><h1 class="title">{{ $item['title'] ?? '' }}</h1></a>
             </div>
           </li>
         @endforeach
