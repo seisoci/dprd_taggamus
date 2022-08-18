@@ -25,6 +25,8 @@
   </section>
 @endsection
 @section('front-css')
+  <link rel="stylesheet" href="{{ asset('assets/plugins/aos/dist/aos.css') }}">
 @endsection
 @section('script')
+  <script src="{{ asset('assets/plugins/aos/dist/aos.js') }}"></script>
 @endsection
