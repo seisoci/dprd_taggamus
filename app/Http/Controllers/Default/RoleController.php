@@ -4,12 +4,9 @@ namespace App\Http\Controllers\Default;
 
 use App\Http\Controllers\Controller;
 use App\Models\Role;
-use App\Models\User;
 use App\Traits\ResponseStatus;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class RoleController extends Controller
@@ -35,9 +32,7 @@ class RoleController extends Controller
       $data = Role::whereNotIn('slug', ['super-admin']);
       return DataTables::of($data)
         ->addColumn('action', function ($row) {
-          $actionBtn = '';
-          if ($row['can_delete']) {
-            $actionBtn = '<div class="dropdown">
+          $actionBtn = '<div class="dropdown">
                           <button type="button" class="btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false">
                             Aksi <i class="fa-regular fa-down"></i>
                           </button>
@@ -50,7 +45,7 @@ class RoleController extends Controller
                             <li> <a href="#" data-bs-toggle="modal" data-bs-target="#modalDelete" data-bs-id="' . $row->id . '" class="delete dropdown-item">Hapus</a></li>
                           </ul>
                         </div> ';
-          }
+
           return $actionBtn;
 
         })
@@ -122,7 +117,7 @@ class RoleController extends Controller
     $offset = ($page - 1) * $resultCount;
     $data = Role::where('name', 'LIKE', '%' . $request->q . '%')
       ->orderBy('name')
-      ->when($request['idArray'], function ($query, $role) use($request) {
+      ->when($request['idArray'], function ($query, $role) use ($request) {
         return $query->whereIn('id', $request['idArray']);
       })
       ->skip($offset)
