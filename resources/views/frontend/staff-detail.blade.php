@@ -5,7 +5,7 @@
     <div class="container">
       <div class="cage-staff-card">
         <div class="staff-card">
-          <img src="dist/images/staff-empty.png" alt="">
+          <img src="{{ $data['image'] ? asset("/storage/images/thumbnail/".$data['image']) : asset('assets/plugins/dist/images/staff-empty.png') }}" alt="">
           <div class="head-title">
             <h1 class="name">{{ $data['name'] }}</h1>
             <p>{{ $data['komisi']['name'] ?? '' }}</p>

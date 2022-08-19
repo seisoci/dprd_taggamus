@@ -175,7 +175,8 @@
   <div class="modal fade" id="agendaModal" tabindex="-1" aria-labelledby="agendaModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header" style="border: none;">
+        <div class="modal-header">
+          <h5 class="modal-title me-2" style="font-weight: bold;">Agenda</h5>
           <h5 class="modal-title" id="agendaModalLabel" style="background: #c0a03f;color: #fff;padding: 0 10px;border-radius: 3px;">Modal title</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>

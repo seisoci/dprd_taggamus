@@ -28,7 +28,7 @@
           <div class="swiper-wrapper">
             @foreach($anotherAlbum ?? array() as $item)
               <div class="swiper-slide">
-                <img style="height: 200px; width:100%" src="{{ $item['image'] ? asset("/storage/images/thumbnail/".$item['image']) : '' }}" class="img-fluid" alt="">
+                <img src="{{ $item['image'] ? asset("/storage/images/thumbnail/".$item['image']) : '' }}" class="img-fluid" alt="">
                 <div class="description">
                   <a href="{{ route('frontend.galleries.show', $item['slug']) }}"><h1 class="title">{{ $item['title'] ?? '' }}</h1></a>
                   <a href="{{ route('frontend.galleries.show', $item['slug']) }}" class="btn btn-sm btn-album">See Album</a>
