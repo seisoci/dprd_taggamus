@@ -20,7 +20,7 @@ class JDIHController extends Controller
     ])
       ->orderBy('posts.publish_at', 'desc')
       ->groupBy('posts.id')
-      ->simplePaginate(1);
+      ->simplePaginate(4);
 
     if ($request->ajax()) {
       $view = view('components.frontend.jdih-list', compact('data'))->render();

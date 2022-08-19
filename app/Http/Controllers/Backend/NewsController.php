@@ -103,7 +103,7 @@ class NewsController extends Controller
     if ($validator->passes()) {
       DB::beginTransaction();
       try {
-        $dimensions = [['1280', '1280', 'thumbnail']];
+        $dimensions = [['1280', '720', 'thumbnail']];
         $dimensionsImage = [['1280', '720', 'thumbnail']];
         $image = isset($request['image']) && !empty($request['image']) ? FileUpload::uploadImage('image', $dimensions) : NULL;
         $data = $request->all();
@@ -160,7 +160,7 @@ class NewsController extends Controller
     ]);
 
     if ($validator->passes()) {
-      $dimensions = [['1280', '1280', 'thumbnail']];
+      $dimensions = [['1280', '720', 'thumbnail']];
       $dimensionsImage = [['1280', '720', 'thumbnail']];
       DB::beginTransaction();
       try {
