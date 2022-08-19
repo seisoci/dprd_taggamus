@@ -36,7 +36,7 @@ class FileUpload
 //          });
           $resizeImage = Image::make($file)->fit($row[0], $row[1]);
           if (!File::isDirectory($image_path . '/' . $row[2])) {
-            File::makeDirectory($image_path . '/' . $row[2], 0777, true);
+            File::makeDirectory($image_path . '/' . $row[2], 0755, true);
           }
           Storage::disk('public')->delete("images/$row[2]/$old_file");
 //          $canvas->insert($resizeImage, 'center');
@@ -61,7 +61,7 @@ class FileUpload
             $constraint->aspectRatio();
           });
           if (!File::isDirectory($image_path . '/' . $row[2])) {
-            File::makeDirectory($image_path . '/' . $row[2], 0777, true);
+            File::makeDirectory($image_path . '/' . $row[2], 0755, true);
           }
           Storage::disk('public')->delete("images/$row[2]/$old_file");
           $canvas->insert($resizeImage, 'center');
@@ -90,7 +90,7 @@ class FileUpload
             $constraint->aspectRatio();
           });
           if (!File::isDirectory($image_path . '/' . $row[2])) {
-            File::makeDirectory($image_path . '/' . $row[2], 0777, true);
+            File::makeDirectory($image_path . '/' . $row[2], 0755, true);
           }
           Storage::disk('public')->delete("images/$row[2]/$old_file");
           $canvas->insert($resizeImage, 'center');
@@ -108,7 +108,7 @@ class FileUpload
             $constraint->aspectRatio();
           });
           if (!File::isDirectory($image_path . '/' . $row[2])) {
-            File::makeDirectory($image_path . '/' . $row[2], 0777, true);
+            File::makeDirectory($image_path . '/' . $row[2], 0755, true);
           }
           Storage::disk('public')->delete("images/$row[2]/$old_file");
           $canvas->insert($resizeImage, 'center');
