@@ -55,7 +55,7 @@
               <div class="info"><i class="far fa-calendar"></i> {{ isset($item['publish_at']) ? \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item['publish_at'])->isoFormat('DD MMMM YYYY') : '' }}
                 | {{ $item['categories'] ?? 'No Categories' }}</div>
               <a href="/{{ strtolower($item['type']) }}/{{ $item['slug'] }}"><h1 class="title">{{ $item['title'] ?? '' }}</h1></a>
-              <p>{{ $item['synopsis'] ?? 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid architecto distinctio dolor dolorem doloribus et impedit iste laboriosam minus neque nobis obcaecati omnis perspiciatis quam quisquam repellat, voluptas voluptate.' }}</p>
+              <p>{{ $item['synopsis'] ?? '' }}</p>
               <a href="/{{ strtolower($item['type']) }}/{{ $item['slug'] }}" class="btn btn-sm btn-link">Read Details</a>
             </div>
           </div>
